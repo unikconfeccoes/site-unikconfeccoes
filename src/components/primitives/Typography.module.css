@@ -1,0 +1,155 @@
+/* ---------------------------------------------------------------- display */
+
+.display {
+  font-family: var(--font-sans);
+  font-weight: 800;
+  font-stretch: 118%;
+  line-height: var(--leading-display);
+  letter-spacing: var(--tracking-display);
+  text-transform: uppercase;
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+.sizemega {
+  font-size: var(--step-mega);
+  letter-spacing: -0.06em;
+  line-height: 0.8;
+}
+
+.size1 {
+  font-size: var(--step-1);
+  letter-spacing: -0.055em;
+}
+
+.size2 {
+  font-size: var(--step-2);
+}
+
+.size3 {
+  font-size: var(--step-3);
+  line-height: 0.95;
+}
+
+.size4 {
+  font-size: var(--step-4);
+  line-height: var(--leading-title);
+  letter-spacing: var(--tracking-title);
+}
+
+.align-start {
+  text-align: start;
+}
+.align-center {
+  text-align: center;
+}
+.align-end {
+  text-align: end;
+}
+
+/* A didone entra em caixa baixa no meio de um título em caixa alta: o
+   contraste de estilo, peso e caixa é a assinatura tipográfica do site. */
+.serif,
+.serifPlain {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-stretch: normal;
+  text-transform: none;
+  letter-spacing: -0.02em;
+  font-synthesis: none;
+}
+
+.serif {
+  color: var(--accent);
+}
+
+/* ------------------------------------------------------------------- mono */
+
+.mono {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  line-height: var(--leading-mono);
+  color: var(--ink);
+}
+
+.monolg {
+  font-size: var(--mono-lg);
+  letter-spacing: 0.04em;
+}
+
+.monomd {
+  font-size: var(--mono-md);
+  letter-spacing: 0.1em;
+}
+
+.monosm {
+  font-size: var(--mono-sm);
+}
+
+.monoxs {
+  font-size: var(--mono-xs);
+  letter-spacing: 0.18em;
+}
+
+.numeric {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.08em;
+}
+
+/* ------------------------------------------------------------------ prose */
+
+.prose {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: var(--leading-body);
+  color: var(--ink);
+}
+
+.prosexl {
+  font-size: var(--text-xl);
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+}
+
+.proselg {
+  font-size: var(--text-lg);
+}
+
+.prosemd {
+  font-size: var(--text-md);
+}
+
+.prosesm {
+  font-size: var(--text-sm);
+}
+
+.measured {
+  max-width: var(--container-prose);
+}
+
+.muted {
+  color: var(--ink-muted);
+}
+
+/* ---------------------------------------------------------------- eyebrow */
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  color: var(--ink-faint);
+}
+
+.eyebrowRule {
+  inline-size: clamp(1.75rem, 4vw, 3.5rem);
+  block-size: 1px;
+  background-color: var(--rule-strong);
+}
+
+.eyebrowIndex {
+  color: var(--accent);
+}

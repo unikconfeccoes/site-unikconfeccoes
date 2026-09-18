@@ -1,0 +1,93 @@
+.wrap {
+  display: grid;
+  gap: var(--space-md);
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.table {
+  inline-size: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-sm);
+}
+
+.table thead th {
+  font-family: var(--font-mono);
+  font-size: var(--mono-xs);
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  text-align: start;
+  padding-block: 0.75rem;
+  border-block-end: 1px solid var(--rule-strong);
+}
+
+.table td,
+.table tbody th {
+  padding-block: 0.85rem;
+  padding-inline-end: var(--space-sm);
+  border-block-end: 1px solid var(--rule);
+  text-align: start;
+  vertical-align: middle;
+}
+
+.fabricName {
+  font-weight: 800;
+  font-stretch: 116%;
+  text-transform: uppercase;
+  font-size: var(--text-md);
+  letter-spacing: -0.02em;
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-size: var(--mono-sm);
+  color: var(--ink-muted);
+}
+
+.num {
+  text-align: end !important;
+  padding-inline-end: 0 !important;
+}
+
+.weight {
+  display: inline-grid;
+  grid-template-columns: clamp(3rem, 10vw, 8rem) 3.75rem;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: var(--mono-sm);
+}
+
+.weightBar {
+  display: block;
+  block-size: 4px;
+  background-color: var(--accent);
+  justify-self: start;
+}
+
+@media (max-width: 639px) {
+  .table thead th:nth-child(2),
+  .table td:nth-child(2) {
+    display: none;
+  }
+
+  .weight {
+    grid-template-columns: 3.5rem;
+  }
+
+  .weightBar {
+    display: none;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .table tbody tr:hover {
+    background-color: var(--surface-raised);
+  }
+}

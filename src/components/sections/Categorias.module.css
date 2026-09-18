@@ -1,0 +1,210 @@
+.root {
+  display: grid;
+  /* Sem isto a coluna cresce até a largura da arara inteira (max-content) e
+     o cabeçalho centraliza no meio dela, fora da tela. */
+  grid-template-columns: minmax(0, 1fr);
+  align-content: center;
+  gap: var(--space-xl);
+  padding-block: var(--section-y);
+  overflow: hidden;
+}
+
+.head {
+  display: grid;
+  gap: var(--space-lg);
+}
+
+.titleBlock {
+  display: grid;
+  gap: var(--space-md);
+}
+
+.headAside {
+  display: grid;
+  gap: var(--space-sm);
+  justify-items: start;
+  align-content: end;
+}
+
+@media (min-width: 1024px) {
+  .head {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    align-items: end;
+  }
+
+  .headAside {
+    justify-items: end;
+    text-align: end;
+  }
+}
+
+/* ------------------------------------------------------------ arara */
+
+.viewport {
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.viewport::-webkit-scrollbar {
+  display: none;
+}
+
+.track {
+  display: flex;
+  gap: var(--grid-gap);
+  inline-size: max-content;
+  padding-inline: max(var(--gutter), calc((100vw - var(--container-max)) / 2 + var(--gutter)));
+  will-change: transform;
+}
+
+.item {
+  flex: none;
+  inline-size: min(78vw, 22rem);
+  scroll-snap-align: center;
+}
+
+.card {
+  display: grid;
+  gap: var(--space-sm);
+  block-size: 100%;
+  padding: var(--space-sm);
+  background-color: var(--surface-raised);
+  border: 1px solid var(--rule);
+  transition: border-color var(--dur-base) var(--ease-brand);
+}
+
+.cardTop {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-sm);
+}
+
+.index {
+  color: var(--accent);
+}
+
+.cardMedia {
+  will-change: transform;
+}
+
+.cardBody {
+  display: grid;
+  gap: 0.5rem;
+  align-content: start;
+}
+
+.name {
+  font-weight: 800;
+  font-stretch: 118%;
+  text-transform: uppercase;
+  font-size: clamp(1.4rem, 2vw, 1.9rem);
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+}
+
+.desc {
+  font-size: var(--text-sm);
+  color: var(--ink-muted);
+  line-height: 1.45;
+}
+
+.price {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-block-start: 0.35rem;
+  font-family: var(--font-mono);
+  font-size: var(--mono-xs);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  color: var(--ink-faint);
+}
+
+.price strong {
+  font-size: var(--mono-lg);
+  letter-spacing: 0.02em;
+  color: var(--accent);
+  font-weight: 500;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .card:hover {
+    border-color: var(--accent);
+  }
+}
+
+.end {
+  display: grid;
+}
+
+.endCard {
+  display: grid;
+  align-content: space-between;
+  gap: var(--space-lg);
+  min-block-size: 20rem;
+  padding: var(--space-md);
+  background-color: var(--accent);
+  color: var(--accent-ink);
+}
+
+.endTitle {
+  font-weight: 800;
+  font-stretch: 118%;
+  text-transform: uppercase;
+  font-size: clamp(2rem, 3vw, 2.75rem);
+  line-height: 0.92;
+  letter-spacing: -0.045em;
+}
+
+.endTitle em {
+  color: var(--preto);
+}
+
+.endArrow {
+  font-size: 3rem;
+  line-height: 1;
+  justify-self: end;
+}
+
+/* ------------------------------------------------------------ progresso */
+
+.progressWrap {
+  display: none;
+}
+
+.progressTrack {
+  display: block;
+  block-size: 1px;
+  background-color: var(--rule);
+}
+
+.progress {
+  display: block;
+  block-size: 100%;
+  background-color: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+@media (min-width: 1024px) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .root {
+    min-block-size: 100svh;
+    padding-block: calc(var(--header-h) + var(--space-md)) var(--space-lg);
+    gap: var(--space-lg);
+  }
+
+  .viewport {
+    overflow: visible;
+    scroll-snap-type: none;
+  }
+
+  .item {
+    inline-size: clamp(16rem, min(20vw, 34svh), 22rem);
+  }
+
+  .progressWrap {
+    display: block;
+  }
+}

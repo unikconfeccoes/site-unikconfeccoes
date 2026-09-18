@@ -1,0 +1,581 @@
+/* =========================================================================
+   PÁGINAS DE CONTEÚDO
+   Leitura longa: medida de ~68 caracteres, entrelinha aberta, hierarquia
+   clara de H2, e a caixa de orçamento presa ao lado.
+   ========================================================================= */
+
+.hero {
+  background-color: var(--surface);
+  color: var(--ink);
+  padding-block: calc(var(--header-h) + var(--safe-top) + var(--space-xl)) var(--space-2xl);
+}
+
+.heroInner {
+  display: grid;
+  gap: var(--space-md);
+  max-inline-size: calc(var(--container-editorial) + 2 * var(--gutter));
+  margin-inline: 0;
+}
+
+@media (min-width: 1728px) {
+  .heroInner {
+    margin-inline: auto;
+    max-inline-size: var(--container-max);
+  }
+}
+
+.h1 {
+  font-weight: 800;
+  font-stretch: 118%;
+  text-transform: uppercase;
+  font-size: clamp(2.3rem, 6vw, 5.75rem);
+  line-height: 0.9;
+  letter-spacing: -0.05em;
+  max-inline-size: 18ch;
+}
+
+.h1 em {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-stretch: normal;
+  text-transform: none;
+  letter-spacing: -0.03em;
+  color: var(--accent);
+}
+
+.lead {
+  font-size: var(--text-xl);
+  line-height: 1.4;
+  letter-spacing: -0.012em;
+  color: var(--ink-muted);
+  max-inline-size: 56ch;
+}
+
+.lead a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs) var(--space-lg);
+  font-family: var(--font-mono);
+  font-size: var(--mono-xs);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+/* --------------------------------------------------------------- corpo */
+
+.body {
+  background-color: var(--surface);
+  color: var(--ink);
+  padding-block: var(--space-2xl) var(--section-y);
+}
+
+.grid {
+  display: grid;
+  gap: var(--space-2xl);
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 22rem);
+    gap: var(--space-3xl);
+    align-items: start;
+  }
+
+  .asideSticky {
+    position: sticky;
+    inset-block-start: calc(var(--header-h) + var(--space-md));
+  }
+}
+
+.article {
+  display: grid;
+  gap: var(--space-2xl);
+  max-inline-size: 46rem;
+}
+
+.asideSticky {
+  display: grid;
+  gap: var(--space-lg);
+}
+
+.after {
+  margin-block-start: var(--space-2xl);
+  display: grid;
+  gap: var(--space-2xl);
+}
+
+/* --------------------------------------------------------------- texto */
+
+.section {
+  display: grid;
+  gap: var(--space-md);
+  scroll-margin-top: calc(var(--header-h) + var(--space-md));
+}
+
+.h2 {
+  font-weight: 800;
+  font-stretch: 112%;
+  font-size: clamp(1.55rem, 2.6vw, 2.25rem);
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  padding-block-start: var(--space-md);
+  border-block-start: 1px solid var(--rule-strong);
+}
+
+.h3 {
+  font-weight: 700;
+  font-size: var(--text-lg);
+}
+
+.p,
+.ul,
+.ol {
+  font-size: var(--text-lg);
+  line-height: 1.65;
+  color: color-mix(in oklab, var(--ink) 88%, var(--surface));
+  max-inline-size: 68ch;
+}
+
+.ul,
+.ol {
+  display: grid;
+  gap: 0.55rem;
+  padding-inline-start: 0;
+}
+
+.ul li,
+.ol li {
+  position: relative;
+  padding-inline-start: 1.75rem;
+}
+
+/* Marcador: a barra do "i", em miniatura. */
+.ul li::before {
+  content: '';
+  position: absolute;
+  inset-inline-start: 0.2rem;
+  inset-block-start: 0.5em;
+  inline-size: 4px;
+  block-size: 0.85em;
+  background-color: var(--accent);
+}
+
+.ol {
+  counter-reset: passo;
+}
+
+.ol li {
+  counter-increment: passo;
+}
+
+.ol li::before {
+  content: counter(passo, decimal-leading-zero);
+  position: absolute;
+  inset-inline-start: 0;
+  inset-block-start: 0.2em;
+  font-family: var(--font-mono);
+  font-size: var(--mono-sm);
+  color: var(--accent);
+}
+
+.article a,
+.faqA a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+.article strong {
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.note {
+  display: grid;
+  gap: 0.4rem;
+  padding: var(--space-md) var(--space-md) var(--space-md) calc(var(--space-md) + 6px);
+  background-color: var(--surface-raised);
+  border-inline-start: 6px solid var(--accent);
+  font-size: var(--text-md);
+  line-height: 1.55;
+}
+
+.noteTitle {
+  font-family: var(--font-mono);
+  font-size: var(--mono-xs);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 500;
+}
+
+/* -------------------------------------------------------------- tabela */
+
+.tableWrap {
+  overflow-x: auto;
+  border: 1px solid var(--rule-strong);
+  background-color: var(--surface-raised);
+}
+
+.table {
+  inline-size: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-sm);
+}
+
+.table caption {
+  caption-side: bottom;
+  padding: 0.75rem 1rem;
+  text-align: start;
+  font-size: var(--text-sm);
+  color: var(--ink-muted);
+  border-block-start: 1px solid var(--rule);
+}
+
+.table th,
+.table td {
+  padding: 0.7rem 1rem;
+  text-align: start;
+  vertical-align: top;
+  border-block-end: 1px solid var(--rule);
+}
+
+.table thead th {
+  font-family: var(--font-mono);
+  font-size: var(--mono-xs);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  background-color: var(--surface-sunken);
+  white-space: nowrap;
+}
+
+.table tbody th {
+  font-weight: 700;
+}
+
+.table strong {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* ------------------------------------------------------------ produtos */
+
+.products {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-lg) var(--grid-gap);
+}
+
+@media (min-width: 1280px) {
+  .products {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* ----------------------------------------------------------------- FAQ */
+
+.faq {
+  border-block-start: 1px solid var(--rule-strong);
+}
+
+.faqItem {
+  border-block-end: 1px solid var(--rule-strong);
+}
+
+.faqQ {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--space-md);
+  padding-block: var(--space-md);
+  font-weight: 600;
+  font-size: clamp(1.05rem, 1.5vw, 1.3rem);
+  line-height: 1.25;
+  cursor: pointer;
+  list-style: none;
+}
+
+.faqQ::-webkit-details-marker {
+  display: none;
+}
+
+.faqSign {
+  position: relative;
+  inline-size: 1rem;
+  block-size: 1rem;
+}
+
+.faqSign::before,
+.faqSign::after {
+  content: '';
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline: 0;
+  block-size: 1.5px;
+  background-color: currentColor;
+  transition: transform var(--dur-base) var(--ease-brand);
+}
+
+.faqSign::after {
+  transform: rotate(90deg);
+}
+
+.faqItem[open] .faqSign::after {
+  transform: rotate(0deg);
+}
+
+.faqA {
+  padding-block-end: var(--space-md);
+  font-size: var(--text-md);
+  line-height: 1.6;
+  color: var(--ink-muted);
+  max-inline-size: 68ch;
+}
+
+/* ----------------------------------------------------------- sumário */
+
+.toc {
+  display: grid;
+  gap: var(--space-xs);
+  padding-block-start: var(--space-sm);
+  border-block-start: 1px solid var(--rule-strong);
+}
+
+.tocTitle {
+  font-family: var(--font-mono);
+  font-size: var(--mono-xs);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.toc ol {
+  display: grid;
+  gap: 0.35rem;
+  font-size: var(--text-sm);
+}
+
+.toc a {
+  color: var(--ink-muted);
+  transition: color var(--dur-fast) var(--ease-brand);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .toc a:hover {
+    color: var(--accent);
+  }
+}
+
+@media (max-width: 1023px) {
+  .toc {
+    display: none;
+  }
+}
+
+/* ------------------------------------------------------ caixa B2B */
+
+.cta {
+  position: relative;
+  display: grid;
+  gap: var(--space-sm);
+  padding: var(--space-lg) var(--space-md) var(--space-md);
+  background-color: var(--surface);
+  color: var(--ink);
+}
+
+.ctaBar {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: var(--space-md);
+  inline-size: 10px;
+  block-size: 1.75rem;
+  background-color: var(--accent);
+}
+
+.ctaKicker {
+  margin-block-start: var(--space-sm);
+  font-family: var(--font-mono);
+  font-size: var(--mono-xs);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.ctaTitle {
+  font-weight: 800;
+  font-stretch: 114%;
+  text-transform: uppercase;
+  font-size: 1.35rem;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.ctaList {
+  display: grid;
+  gap: 0.4rem;
+  font-size: var(--text-sm);
+  color: var(--ink-muted);
+}
+
+.ctaList li {
+  padding-inline-start: 1rem;
+  position: relative;
+}
+
+.ctaList li::before {
+  content: '';
+  position: absolute;
+  inset-inline-start: 0;
+  inset-block-start: 0.5em;
+  inline-size: 3px;
+  block-size: 0.7em;
+  background-color: var(--accent);
+}
+
+.ctaActions {
+  display: grid;
+  gap: 0.5rem;
+  margin-block-start: var(--space-xs);
+}
+
+.ctaActions > * {
+  inline-size: 100%;
+}
+
+/* ------------------------------------------------------ relacionados */
+
+.related {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  gap: var(--grid-gap);
+}
+
+.relatedCard {
+  position: relative;
+  display: grid;
+  gap: 0.4rem;
+  align-content: start;
+  block-size: 100%;
+  padding: var(--space-md);
+  padding-inline-end: 2.5rem;
+  background-color: var(--surface-raised);
+  border: 1px solid var(--rule);
+  transition: border-color var(--dur-fast) var(--ease-brand);
+}
+
+.relatedKicker {
+  font-family: var(--font-mono);
+  font-size: var(--mono-xs);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.relatedTitle {
+  font-weight: 700;
+  font-size: var(--text-lg);
+  line-height: 1.2;
+}
+
+.relatedText {
+  font-size: var(--text-sm);
+  color: var(--ink-muted);
+}
+
+.relatedArrow {
+  position: absolute;
+  inset-block-start: var(--space-md);
+  inset-inline-end: var(--space-md);
+  color: var(--accent);
+  transition: transform var(--dur-base) var(--ease-brand);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .relatedCard:hover {
+    border-color: var(--accent);
+  }
+
+  .relatedCard:hover .relatedArrow {
+    transform: translateX(0.3rem);
+  }
+}
+
+/* ------------------------------------------------------ fichas / specs */
+
+.specs {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+  gap: 1px;
+  background-color: var(--rule-strong);
+  border: 1px solid var(--rule-strong);
+}
+
+.spec {
+  display: grid;
+  gap: 0.3rem;
+  padding: var(--space-sm);
+  background-color: var(--surface-raised);
+}
+
+.specLabel {
+  font-family: var(--font-mono);
+  font-size: var(--mono-xs);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.specValue {
+  font-weight: 700;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+  gap: var(--grid-gap);
+}
+
+.card {
+  display: grid;
+  gap: 0.5rem;
+  align-content: start;
+  padding: var(--space-md);
+  background-color: var(--surface-raised);
+  border: 1px solid var(--rule);
+}
+
+.cardTitle {
+  font-weight: 800;
+  font-stretch: 112%;
+  font-size: var(--text-lg);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.cardText {
+  font-size: var(--text-sm);
+  line-height: 1.55;
+  color: var(--ink-muted);
+}
+
+.twoCols {
+  display: grid;
+  gap: var(--space-lg);
+}
+
+@media (min-width: 768px) {
+  .twoCols {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

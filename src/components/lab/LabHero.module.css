@@ -1,0 +1,93 @@
+.hero {
+  position: relative;
+  background-color: var(--surface);
+  color: var(--ink);
+  padding-block: calc(var(--header-h) + var(--safe-top) + var(--space-2xl)) var(--space-2xl);
+  min-block-size: 100svh;
+  display: grid;
+  align-items: end;
+  overflow: hidden;
+  /* Grade de modelagem ao fundo: o Lab é bancada, não vitrine. */
+  background-image:
+    linear-gradient(color-mix(in oklab, var(--osso) 5%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in oklab, var(--osso) 5%, transparent) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.inner {
+  display: grid;
+  gap: var(--space-xl);
+}
+
+.kicker {
+  color: var(--accent);
+}
+
+.word {
+  position: relative;
+  display: block;
+  line-height: 0.8;
+}
+
+.unik {
+  display: flex;
+  font-weight: 800;
+  font-stretch: 125%;
+  font-size: clamp(5rem, 24vw, 24rem);
+  letter-spacing: -0.075em;
+  color: var(--bronze);
+}
+
+.mask {
+  display: block;
+  overflow: hidden;
+  padding-block: 0.02em 0.06em;
+}
+
+.letter {
+  display: block;
+}
+
+.lab {
+  position: absolute;
+  inset-inline-end: 4%;
+  inset-block-end: -8%;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(4rem, 17vw, 17rem);
+  letter-spacing: -0.04em;
+  color: var(--osso);
+  text-shadow: 0 0.05em 0.3em rgb(0 0 0 / 0.4);
+}
+
+.bottom {
+  display: grid;
+  gap: var(--space-lg);
+  padding-block-start: var(--space-lg);
+  border-block-start: 1px solid var(--rule);
+}
+
+@media (min-width: 1024px) {
+  .bottom {
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    align-items: end;
+  }
+
+  .ctas {
+    justify-self: end;
+  }
+}
+
+.lead {
+  font-size: var(--text-xl);
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+  max-inline-size: 40ch;
+}
+
+.ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+}

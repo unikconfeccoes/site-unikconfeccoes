@@ -1,0 +1,52 @@
+.root {
+  display: grid;
+  gap: var(--space-lg);
+  overflow: hidden;
+}
+
+.head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: end;
+  gap: var(--space-lg);
+  margin-block-end: var(--space-lg);
+}
+
+.titleBlock {
+  display: grid;
+  gap: var(--space-md);
+}
+
+.band {
+  overflow: hidden;
+}
+
+.row {
+  display: flex;
+  gap: var(--grid-gap);
+  inline-size: max-content;
+  padding-inline-start: var(--gutter);
+  will-change: transform;
+}
+
+.band:nth-of-type(odd) .row {
+  padding-inline-start: 12vw;
+}
+
+.item {
+  flex: none;
+  inline-size: clamp(13rem, 19vw, 20rem);
+  display: grid;
+  gap: 0.6rem;
+}
+
+.caption {
+  display: grid;
+  gap: 0.1rem;
+}
+
+.client {
+  font-weight: 600;
+  font-size: var(--text-sm);
+}

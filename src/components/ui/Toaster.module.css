@@ -1,0 +1,68 @@
+.region {
+  position: fixed;
+  inset-inline-end: max(var(--gutter), var(--safe-right));
+  inset-block-end: calc(var(--space-md) + var(--safe-bottom));
+  z-index: var(--z-toast);
+  pointer-events: none;
+  background: transparent;
+}
+
+@media (max-width: 767px) {
+  .region {
+    inset-inline: var(--space-sm);
+    inset-block-end: calc(5.25rem + var(--safe-bottom));
+  }
+}
+
+.toast {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  min-inline-size: min(22rem, 100%);
+  padding: 1rem 1.1rem;
+  background-color: var(--grafite);
+  color: var(--osso);
+  border: 1px solid var(--rule-strong);
+  box-shadow: 0 24px 60px rgb(0 0 0 / 0.35);
+  animation: enter var(--dur-base) var(--ease-brand) both;
+}
+
+@keyframes enter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+.bar {
+  inline-size: 3px;
+  align-self: stretch;
+  background-color: var(--ouro);
+}
+
+.text {
+  display: grid;
+  gap: 0.1rem;
+  flex: 1;
+}
+
+.title {
+  font-weight: 600;
+  font-size: var(--text-sm);
+}
+
+.body {
+  font-size: var(--text-sm);
+  color: var(--ink-muted);
+}
+
+.action {
+  font-family: var(--font-mono);
+  font-size: var(--mono-xs);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--ouro);
+  padding: 0.6rem 0.2rem;
+  white-space: nowrap;
+}

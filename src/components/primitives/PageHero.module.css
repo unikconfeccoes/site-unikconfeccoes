@@ -1,0 +1,73 @@
+.hero {
+  background-color: var(--surface);
+  color: var(--ink);
+  padding-block: calc(var(--header-h) + var(--safe-top) + var(--space-2xl)) var(--space-2xl);
+  overflow: hidden;
+}
+
+.inner {
+  position: relative;
+  display: grid;
+  gap: var(--space-xl);
+}
+
+@media (min-width: 1024px) {
+  .inner {
+    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+    align-items: end;
+  }
+}
+
+/* A barra do "i" em pé, sangrando para fora do topo. */
+.bar {
+  position: absolute;
+  inset-block-start: calc(-1 * (var(--header-h) + var(--space-2xl)));
+  inset-inline-end: var(--gutter);
+  inline-size: clamp(10px, 1.2vw, 18px);
+  block-size: calc(100% + var(--header-h) + var(--space-2xl) - var(--space-md));
+  background-color: var(--osso);
+  opacity: 0.08;
+}
+
+.main {
+  display: grid;
+  gap: var(--space-md);
+}
+
+.title {
+  font-weight: 800;
+  font-stretch: 120%;
+  text-transform: uppercase;
+  font-size: var(--step-1);
+  line-height: 0.86;
+  letter-spacing: -0.058em;
+}
+
+.title em {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-stretch: normal;
+  text-transform: none;
+  letter-spacing: -0.03em;
+  color: var(--accent);
+}
+
+.body {
+  font-size: var(--text-lg);
+  color: var(--ink-muted);
+  max-inline-size: 52ch;
+}
+
+.aside {
+  display: grid;
+  gap: var(--space-sm);
+  justify-items: start;
+}
+
+@media (min-width: 1024px) {
+  .aside {
+    justify-items: end;
+    text-align: end;
+  }
+}

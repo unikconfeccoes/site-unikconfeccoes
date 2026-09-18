@@ -1,0 +1,30 @@
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0;
+  font-family: var(--font-mono);
+  font-size: var(--mono-xs);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.item + .item::before {
+  content: '/';
+  margin-inline: 0.6rem;
+  opacity: 0.6;
+}
+
+.item a {
+  transition: color var(--dur-fast) var(--ease-brand);
+}
+
+.item [aria-current] {
+  color: var(--ink-muted);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .item a:hover {
+    color: var(--accent);
+  }
+}

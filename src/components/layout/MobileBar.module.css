@@ -1,0 +1,56 @@
+.bar {
+  position: fixed;
+  inset-inline: 0;
+  inset-block-end: 0;
+  z-index: var(--z-sticky);
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.6rem max(0.75rem, var(--safe-left)) calc(0.6rem + var(--safe-bottom));
+  background-color: color-mix(in oklab, var(--preto) 88%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-block-start: 1px solid var(--rule);
+}
+
+@media (min-width: 768px) {
+  .bar {
+    display: none;
+  }
+}
+
+.primary {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  min-block-size: 50px;
+  background-color: var(--ouro);
+  color: var(--preto);
+  font-family: var(--font-mono);
+  font-size: var(--mono-sm);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+}
+
+.count {
+  padding: 0.2rem 0.45rem;
+  background-color: var(--preto);
+  color: var(--ouro);
+  letter-spacing: 0.04em;
+}
+
+.whats {
+  display: grid;
+  place-items: center;
+  inline-size: 50px;
+  min-block-size: 50px;
+  border: 1px solid var(--rule-strong);
+  color: var(--osso);
+}
+
+.icon {
+  inline-size: 1.35rem;
+  block-size: 1.35rem;
+}

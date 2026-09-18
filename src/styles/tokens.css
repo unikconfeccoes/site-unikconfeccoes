@@ -1,0 +1,225 @@
+/* =========================================================================
+   UNIK — DESIGN TOKENS
+   Fonte de verdade: logo vetorial oficial + perfil @unik.confeccoes.
+   Nada de cor, escala ou tempo deve ser escrito à mão fora deste arquivo.
+   ========================================================================= */
+
+:root {
+  /* ---------------------------------------------------------------------
+     1. PALETA
+     O bronze é o do logo (amostrado do avatar oficial: ≈ #715D35). Ele é
+     escuro demais para texto pequeno sobre preto, então existe o --ouro, a
+     mesma matiz clareada, para texto e detalhes em superfície escura.
+     --------------------------------------------------------------------- */
+  --preto: #0b0b0b;
+  --carvao: #141312;
+  --grafite: #1d1c1a;
+  --bronze: #715d35;
+  --ouro: #b39b68;
+  --ouro-claro: #d6c49a;
+  --osso: #f3efe7;
+  --linho: #e7e0d3;
+  --branco: #ffffff;
+
+  /* ---------------------------------------------------------------------
+     2. ATMOSFERAS
+     Cada seção declara data-atmosphere e herda um jogo completo de papéis.
+     Componentes consomem SÓ os papéis (surface/ink/accent…), nunca a paleta.
+     --ink-faint é TEXTO: as proporções garantem 4,5:1 (WCAG 2.2 AA).
+     --------------------------------------------------------------------- */
+  --surface: var(--osso);
+  --surface-raised: var(--branco);
+  --surface-sunken: var(--linho);
+  --ink: var(--preto);
+  --ink-muted: color-mix(in oklab, var(--preto) 74%, var(--osso));
+  --ink-faint: color-mix(in oklab, var(--preto) 62%, var(--osso));
+  --accent: var(--bronze);
+  --accent-ink: var(--osso);
+  --rule: color-mix(in oklab, var(--preto) 14%, transparent);
+  --rule-strong: color-mix(in oklab, var(--preto) 32%, transparent);
+  --overlay-scrim: color-mix(in oklab, var(--preto) 60%, transparent);
+}
+
+/* Atelier — claro, editorial. Catálogo, processo, perguntas. */
+[data-atmosphere='atelier'] {
+  --surface: var(--osso);
+  --surface-raised: var(--branco);
+  --surface-sunken: var(--linho);
+  --ink: var(--preto);
+  --ink-muted: color-mix(in oklab, var(--preto) 74%, var(--osso));
+  --ink-faint: color-mix(in oklab, var(--preto) 62%, var(--osso));
+  --accent: var(--bronze);
+  --accent-ink: var(--osso);
+  --rule: color-mix(in oklab, var(--preto) 14%, transparent);
+  --rule-strong: color-mix(in oklab, var(--preto) 32%, transparent);
+}
+
+/* Noite — preto profundo. Herói, técnicas, Lab, rodapé. */
+[data-atmosphere='noite'] {
+  --surface: var(--preto);
+  --surface-raised: var(--grafite);
+  --surface-sunken: var(--carvao);
+  --ink: var(--osso);
+  --ink-muted: color-mix(in oklab, var(--osso) 76%, var(--preto));
+  --ink-faint: color-mix(in oklab, var(--osso) 58%, var(--preto));
+  --accent: var(--ouro);
+  --accent-ink: var(--preto);
+  --rule: color-mix(in oklab, var(--osso) 14%, transparent);
+  --rule-strong: color-mix(in oklab, var(--osso) 34%, transparent);
+}
+
+/* Grafite — escuro de respiro, um degrau acima do preto. Categorias. */
+[data-atmosphere='grafite'] {
+  --surface: var(--carvao);
+  --surface-raised: var(--grafite);
+  --surface-sunken: var(--preto);
+  --ink: var(--osso);
+  --ink-muted: color-mix(in oklab, var(--osso) 76%, var(--carvao));
+  --ink-faint: color-mix(in oklab, var(--osso) 60%, var(--carvao));
+  --accent: var(--ouro);
+  --accent-ink: var(--preto);
+  --rule: color-mix(in oklab, var(--osso) 14%, transparent);
+  --rule-strong: color-mix(in oklab, var(--osso) 34%, transparent);
+}
+
+/* Bronze — o momento de decisão. Chamada final, orçamento. */
+[data-atmosphere='bronze'] {
+  --surface: var(--ouro);
+  --surface-raised: var(--ouro-claro);
+  --surface-sunken: color-mix(in oklab, var(--ouro) 80%, var(--bronze));
+  --ink: var(--preto);
+  --ink-muted: color-mix(in oklab, var(--preto) 82%, var(--ouro));
+  --ink-faint: color-mix(in oklab, var(--preto) 74%, var(--ouro));
+  --accent: var(--preto);
+  --accent-ink: var(--osso);
+  --rule: color-mix(in oklab, var(--preto) 20%, transparent);
+  --rule-strong: color-mix(in oklab, var(--preto) 42%, transparent);
+}
+
+:root {
+  /* ---------------------------------------------------------------------
+     3. TIPOGRAFIA
+     Archivo carrega a voz da marca — sans geométrica pesada, como o "UNK"
+     do logo, com eixo de largura para os títulos expandidos. Bodoni Moda é a
+     serifa didone do "CONFECÇÕES", usada só em itálico, para inflexão.
+     IBM Plex Mono é a ficha técnica: gramatura, composição, preço, rótulo.
+     --------------------------------------------------------------------- */
+  --font-sans: var(--font-archivo), 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+  --font-serif: var(--font-bodoni), 'Bodoni Moda', 'Didot', Georgia, serif;
+  --font-mono: var(--font-plex-mono), 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  --step-mega: clamp(4.5rem, 21vw, 20rem);
+  --step-1: clamp(2.9rem, 9.5vw, 9.5rem);
+  --step-2: clamp(2.2rem, 6vw, 5.5rem);
+  --step-3: clamp(1.7rem, 3.8vw, 3.25rem);
+  --step-4: clamp(1.3rem, 2.4vw, 2rem);
+
+  --text-xl: clamp(1.35rem, 2.2vw, 2rem);
+  --text-lg: clamp(1.075rem, 1.35vw, 1.3rem);
+  --text-md: clamp(0.975rem, 1.05vw, 1.075rem);
+  --text-sm: clamp(0.875rem, 0.9vw, 0.95rem);
+
+  --mono-lg: clamp(0.875rem, 1vw, 1rem);
+  --mono-md: clamp(0.75rem, 0.82vw, 0.8125rem);
+  --mono-sm: clamp(0.6875rem, 0.72vw, 0.75rem);
+  --mono-xs: 0.65rem;
+
+  --leading-display: 0.86;
+  --leading-title: 1.02;
+  --leading-body: 1.55;
+  --leading-mono: 1.45;
+
+  --tracking-display: -0.045em;
+  --tracking-title: -0.03em;
+  --tracking-label: 0.14em;
+  /* O espaçamento largo do "C O N F E C Ç Õ E S" do logo. */
+  --tracking-brand: 0.62em;
+
+  /* ---------------------------------------------------------------------
+     4. ESPAÇO
+     --------------------------------------------------------------------- */
+  --space-3xs: 0.25rem;
+  --space-2xs: 0.5rem;
+  --space-xs: 0.75rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2.5rem;
+  --space-xl: 4rem;
+  --space-2xl: 6rem;
+  --space-3xl: 9rem;
+
+  --section-y: clamp(5rem, 13vh, 11rem);
+  --section-y-tight: clamp(3.5rem, 8vh, 7rem);
+  --gutter: clamp(1.125rem, 4vw, 4.5rem);
+
+  /* ---------------------------------------------------------------------
+     5. CONTAINERS
+     --------------------------------------------------------------------- */
+  --container-max: 1728px;
+  --container-editorial: 1180px;
+  --container-prose: 60ch;
+  --grid-gap: clamp(0.875rem, 1.6vw, 1.75rem);
+
+  /* ---------------------------------------------------------------------
+     6. RAIOS
+     O logo é ortogonal: cantos vivos. Raio só em superfícies de interface.
+     --------------------------------------------------------------------- */
+  --radius-none: 0;
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-pill: 999px;
+
+  /* ---------------------------------------------------------------------
+     7. CAMADAS
+     --------------------------------------------------------------------- */
+  --z-below: -1;
+  --z-raised: 10;
+  --z-sticky: 100;
+  --z-header: 200;
+  --z-cursor: 250;
+  --z-overlay: 300;
+  --z-toast: 500;
+  --z-preloader: 600;
+
+  /* ---------------------------------------------------------------------
+     8. MOTION
+     Entrada (expo out), transição de estado (in-out) e máscara.
+     --------------------------------------------------------------------- */
+  --ease-brand: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-inout: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-mask: cubic-bezier(0.76, 0, 0.24, 1);
+
+  --dur-instant: 120ms;
+  --dur-fast: 240ms;
+  --dur-base: 420ms;
+  --dur-slow: 720ms;
+
+  /* ---------------------------------------------------------------------
+     9. VIEWPORT
+     --------------------------------------------------------------------- */
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+
+  --header-h: 4.5rem;
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --header-h: 5.5rem;
+  }
+}
+
+/* BREAKPOINTS (referência — CSS Modules usam os literais)
+   sm 480 · md 768 · lg 1024 · xl 1280 · 2xl 1600 */
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-instant: 1ms;
+    --dur-fast: 1ms;
+    --dur-base: 1ms;
+    --dur-slow: 1ms;
+  }
+}

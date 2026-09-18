@@ -1,0 +1,26 @@
+.band {
+  block-size: calc(var(--header-h) + var(--safe-top));
+  background-color: var(--preto);
+}
+
+.related {
+  border-block-start: 1px solid var(--rule);
+}
+
+.relatedHead {
+  display: grid;
+  gap: var(--space-md);
+  margin-block-end: var(--space-xl);
+}
+
+.relatedGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-xl) var(--grid-gap);
+}
+
+@media (min-width: 1024px) {
+  .relatedGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}

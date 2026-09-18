@@ -1,0 +1,171 @@
+.accent {
+  color: var(--accent);
+}
+
+.head {
+  display: grid;
+  gap: var(--space-md);
+  margin-block-end: var(--space-xl);
+}
+
+/* ------------------------------------------------------------ o que é */
+
+.what {
+  display: grid;
+  gap: var(--space-2xl);
+}
+
+.whatText {
+  display: grid;
+  gap: var(--space-md);
+  justify-items: start;
+  align-content: start;
+}
+
+@media (min-width: 1024px) {
+  .what {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+  }
+}
+
+.pillars {
+  display: grid;
+  gap: var(--grid-gap);
+}
+
+@media (min-width: 640px) {
+  .pillars {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.pillar {
+  display: grid;
+  align-content: start;
+  gap: 0.6rem;
+  padding: var(--space-md);
+  background-color: var(--surface-raised);
+  border: 1px solid var(--rule);
+  min-block-size: 14rem;
+}
+
+.pillarTitle {
+  font-weight: 800;
+  font-stretch: 116%;
+  text-transform: uppercase;
+  font-size: var(--step-4);
+  line-height: 1;
+  letter-spacing: -0.035em;
+  margin-block-start: auto;
+}
+
+.pillarBody {
+  font-size: var(--text-sm);
+  color: var(--ink-muted);
+}
+
+/* ------------------------------------------------------------ processo */
+
+.steps {
+  display: grid;
+  gap: var(--grid-gap);
+}
+
+@media (min-width: 768px) {
+  .steps {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.step {
+  display: grid;
+  align-content: start;
+  gap: 0.6rem;
+  padding-block-start: var(--space-md);
+  border-block-start: 1px solid var(--rule-strong);
+  position: relative;
+}
+
+.stepBar {
+  position: absolute;
+  inset-block-start: -1px;
+  inset-inline-start: 0;
+  inline-size: 3rem;
+  block-size: 3px;
+  background-color: var(--accent);
+}
+
+.stepTitle {
+  font-weight: 800;
+  font-stretch: 118%;
+  text-transform: uppercase;
+  font-size: var(--step-3);
+  line-height: 0.95;
+  letter-spacing: -0.045em;
+}
+
+.stepBody {
+  color: var(--ink-muted);
+}
+
+/* ------------------------------------------------------------- tecidos */
+
+.fabrics {
+  display: grid;
+  gap: var(--space-2xl);
+}
+
+@media (min-width: 1024px) {
+  .fabrics {
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    align-items: start;
+  }
+
+  .fabricsHead {
+    position: sticky;
+    inset-block-start: calc(var(--header-h) + var(--space-lg));
+  }
+}
+
+.fabricsHead {
+  display: grid;
+  gap: var(--space-md);
+}
+
+.fabricsFigure {
+  max-inline-size: 16rem;
+  margin-block-start: var(--space-sm);
+}
+
+/* --------------------------------------------------------------- ideia */
+
+.idea {
+  display: grid;
+  gap: var(--space-2xl);
+}
+
+@media (min-width: 1024px) {
+  .idea {
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    align-items: start;
+  }
+
+  .ideaHead {
+    position: sticky;
+    inset-block-start: calc(var(--header-h) + var(--space-lg));
+  }
+}
+
+.ideaHead {
+  display: grid;
+  gap: var(--space-md);
+}
+
+.ideaAside {
+  display: grid;
+  gap: var(--space-xs);
+  justify-items: start;
+  margin-block-start: var(--space-md);
+  padding-block-start: var(--space-md);
+  border-block-start: 1px solid var(--rule);
+}

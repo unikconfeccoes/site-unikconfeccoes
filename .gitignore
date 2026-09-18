@@ -1,0 +1,17 @@
+node_modules
+.next
+out
+build
+next-env.d.ts
+*.tsbuildinfo
+.env
+.env*.local
+.DS_Store
+.vercel
+
+# supabase
+supabase/.temp
+supabase/.branches
+
+# fontes internas (planilhas de custo, arquivos originais) — não publicar
+_fontes/

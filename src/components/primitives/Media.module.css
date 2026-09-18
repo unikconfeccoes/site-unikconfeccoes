@@ -1,0 +1,88 @@
+.frame {
+  position: relative;
+  overflow: hidden;
+  inline-size: 100%;
+  border-radius: var(--radius-none);
+}
+
+.sunken {
+  background-color: var(--surface-sunken);
+}
+
+.raised {
+  background-color: var(--surface-raised);
+}
+
+.media {
+  position: absolute;
+  inset: 0;
+  will-change: transform;
+}
+
+.img {
+  object-fit: cover;
+  object-position: center;
+}
+
+/* ----------------------------------------------------- silhueta técnica */
+
+.placeholder {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: var(--ink-faint);
+}
+
+/* Papel milimetrado da mesa de modelagem: a grade some nas bordas. */
+.grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--rule) 1px, transparent 1px),
+    linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+  background-size: 24px 24px;
+  background-position: center;
+  mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, #000 30%, transparent 80%);
+  opacity: 0.7;
+}
+
+.garment {
+  position: relative;
+  inline-size: 62%;
+  block-size: 72%;
+  --garment-fill: color-mix(in oklab, var(--surface) 55%, transparent);
+}
+
+.caption {
+  position: absolute;
+  inset-block-end: 0.85rem;
+  inset-inline-start: 0.9rem;
+  font-family: var(--font-mono);
+  font-size: var(--mono-xs);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+/* A cortina começa COBRINDO e o GSAP a retira (ver o guarda no componente). */
+.curtain {
+  position: absolute;
+  inset: 0;
+  background-color: var(--surface);
+  pointer-events: none;
+}
+
+:global(html:not(.js)) .curtain {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .curtain {
+    display: none;
+  }
+
+  .media {
+    will-change: auto;
+  }
+}

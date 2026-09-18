@@ -1,0 +1,15 @@
+.section {
+  position: relative;
+  background-color: var(--surface);
+  color: var(--ink);
+  padding-block: var(--section-y);
+  isolation: isolate;
+}
+
+.tight {
+  padding-block: var(--section-y-tight);
+}
+
+.bleed {
+  padding-block: 0;
+}

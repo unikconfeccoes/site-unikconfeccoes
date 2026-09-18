@@ -1,0 +1,77 @@
+.grid {
+  display: grid;
+  gap: var(--space-2xl);
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 0.8fr);
+    gap: var(--space-3xl);
+  }
+}
+
+.text {
+  display: grid;
+  gap: var(--space-lg);
+  justify-items: start;
+}
+
+.wordmark {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  column-gap: 0.12em;
+  line-height: 0.8;
+}
+
+.unik {
+  font-weight: 800;
+  font-stretch: 122%;
+  font-size: clamp(4rem, 10vw, 10.5rem);
+  letter-spacing: -0.07em;
+  color: var(--ouro);
+}
+
+.lab {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(3rem, 7.6vw, 8rem);
+  letter-spacing: -0.04em;
+  color: var(--osso);
+}
+
+.pillars {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-sm) var(--space-lg);
+  inline-size: 100%;
+  padding-block: var(--space-md);
+  border-block: 1px solid var(--rule);
+}
+
+.pillar {
+  display: flex;
+  gap: var(--space-xs);
+  align-items: baseline;
+  font-weight: 600;
+}
+
+.pillarNum {
+  color: var(--accent);
+}
+
+.ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+}
+
+.figure {
+  display: grid;
+  gap: var(--space-xs);
+  /* O recorte do Instagram tem ~230 px de largura: acima disso ele borra. */
+  max-inline-size: 20rem;
+  justify-self: center;
+  inline-size: 100%;
+}

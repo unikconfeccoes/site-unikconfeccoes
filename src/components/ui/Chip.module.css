@@ -1,0 +1,41 @@
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  min-block-size: 40px;
+  padding-inline: 0.95rem;
+  border: 1px solid var(--rule-strong);
+  font-family: var(--font-mono);
+  font-size: var(--mono-sm);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+  transition:
+    background-color var(--dur-fast) var(--ease-brand),
+    color var(--dur-fast) var(--ease-brand),
+    border-color var(--dur-fast) var(--ease-brand);
+}
+
+.sm {
+  min-block-size: 36px;
+  padding-inline: 0.75rem;
+  font-size: var(--mono-xs);
+}
+
+.chip[aria-pressed='true'] {
+  background-color: var(--ink);
+  border-color: var(--ink);
+  color: var(--surface);
+}
+
+.count {
+  font-variant-numeric: tabular-nums;
+  opacity: 0.6;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .chip[aria-pressed='false']:hover {
+    border-color: var(--ink);
+  }
+}

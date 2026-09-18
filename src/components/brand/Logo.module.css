@@ -1,0 +1,28 @@
+.logo {
+  display: block;
+  flex: none;
+  overflow: visible;
+}
+
+/* O PDF pinta com preenchimento + contorno fino; sem o contorno, a junção do
+   U com o N mostra uma fresta de 1 px em telas de alta densidade. */
+.letters {
+  fill: var(--logo-letters, currentColor);
+  stroke: var(--logo-letters, currentColor);
+  stroke-width: 0.22;
+}
+
+.letters > g,
+.letters > g > path {
+  transform-box: fill-box;
+}
+
+.bar {
+  fill: var(--logo-bar, currentColor);
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+}
+
+.tag {
+  fill: var(--logo-tag, var(--logo-letters, currentColor));
+}

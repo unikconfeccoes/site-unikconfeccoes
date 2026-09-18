@@ -1,0 +1,85 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(6.25rem, 1fr));
+  gap: 0.5rem;
+}
+
+.compact {
+  grid-template-columns: repeat(auto-fill, minmax(5.5rem, 1fr));
+  gap: 0.35rem;
+}
+
+.cell {
+  display: grid;
+  gap: 0.35rem;
+  padding: 0.55rem;
+  border: 1px solid var(--rule-strong);
+  background-color: var(--surface-raised);
+  transition: border-color var(--dur-fast) var(--ease-brand);
+}
+
+.cell[data-filled] {
+  border-color: var(--accent);
+}
+
+.size {
+  font-family: var(--font-mono);
+  font-size: var(--mono-sm);
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-align: center;
+}
+
+.cell[data-filled] .size {
+  color: var(--accent);
+}
+
+.stepper {
+  display: grid;
+  grid-template-columns: 1.75rem minmax(0, 1fr) 1.75rem;
+  align-items: center;
+}
+
+.btn {
+  display: grid;
+  place-items: center;
+  block-size: 2rem;
+  font-size: 1.1rem;
+  line-height: 1;
+  color: var(--ink-muted);
+}
+
+.btn:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .btn:not(:disabled):hover {
+    color: var(--accent);
+  }
+}
+
+.input {
+  inline-size: 100%;
+  min-inline-size: 0;
+  block-size: 2rem;
+  border: 0;
+  background: transparent;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: var(--mono-lg);
+  font-variant-numeric: tabular-nums;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.input::-webkit-outer-spin-button,
+.input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.input::placeholder {
+  color: var(--ink-faint);
+}

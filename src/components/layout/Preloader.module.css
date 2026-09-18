@@ -1,0 +1,42 @@
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-preloader);
+  display: grid;
+  place-items: center;
+  background-color: var(--preto);
+  color: var(--osso);
+  will-change: transform;
+  --logo-letters: var(--ouro);
+  --logo-bar: var(--osso);
+}
+
+.mark {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-md);
+}
+
+/* A máscara é o que faz as letras "subirem de dentro" em vez de aparecerem. */
+.clip {
+  overflow: hidden;
+  padding-block-start: 1.2em;
+  margin-block-start: -1.2em;
+}
+
+.line {
+  display: block;
+  inline-size: min(60vw, 28rem);
+  block-size: 1px;
+  background-color: var(--ouro);
+  transform-origin: left;
+}
+
+.tag {
+  font-family: var(--font-mono);
+  font-size: var(--mono-xs);
+  letter-spacing: var(--tracking-brand);
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-inline-end: calc(-1 * var(--tracking-brand));
+}

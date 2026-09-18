@@ -1,0 +1,86 @@
+.tape {
+  overflow: hidden;
+  border-block-end: 1px solid var(--rule-strong);
+  padding-block: 1rem;
+}
+
+.tapeTrack {
+  display: flex;
+  inline-size: max-content;
+  animation: tape 38s linear infinite;
+}
+
+.tapeItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.75rem;
+  padding-inline-end: 1.75rem;
+  font-family: var(--font-mono);
+  font-size: var(--mono-md);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+}
+
+/* A barra do "i" como separador. */
+.tapeBar {
+  inline-size: 5px;
+  block-size: 1.1em;
+  background-color: currentColor;
+}
+
+@keyframes tape {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.body {
+  display: grid;
+  gap: var(--space-xl);
+  padding-block: var(--section-y);
+}
+
+@media (min-width: 1024px) {
+  .body {
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+    align-items: end;
+  }
+}
+
+.title {
+  font-weight: 800;
+  font-stretch: 122%;
+  text-transform: uppercase;
+  font-size: var(--step-1);
+  line-height: 0.84;
+  letter-spacing: -0.06em;
+}
+
+.title em {
+  display: block;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-stretch: normal;
+  text-transform: none;
+  letter-spacing: -0.035em;
+  padding-inline-start: 0.5em;
+}
+
+.side {
+  display: grid;
+  gap: var(--space-md);
+  justify-items: start;
+}
+
+.text {
+  font-size: var(--text-lg);
+  line-height: 1.45;
+  max-inline-size: 38ch;
+}
+
+.ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+}
