@@ -24,3 +24,9 @@
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
+
+.about {
+  display: grid;
+  gap: var(--space-2xl);
+  max-inline-size: 52rem;
+}

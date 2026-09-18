@@ -1,14 +1,25 @@
 /**
- * Perguntas frequentes. As respostas descrevem só o que é confirmado —
- * pedido mínimo e prazo médio ainda não foram informados pela UNIK, então as
- * respostas remetem ao orçamento em vez de inventar número.
+ * Perguntas frequentes da HOME (as seis mais importantes).
+ * A lista completa, por tema, está em src/data/seo/faq-full.ts.
+ * Pedido mínimo, pagamento e reuniões: confirmados pela UNIK em 18/09/2026.
  */
 export const FAQ = [
+  {
+    id: 'minimo',
+    pergunta: 'Qual é o pedido mínimo?',
+    resposta:
+      'O pedido mínimo é de 20 peças. Você pode combinar dois produtos diferentes, desde que tenha pelo menos 10 peças iguais de cada um (por exemplo, 10 polos e 10 camisetas).',
+  },
   {
     id: 'atacado',
     pergunta: 'A partir de quantas peças vale o preço de atacado?',
     resposta:
-      'A partir de 60 peças do mesmo modelo, somando todos os tamanhos. No configurador de cada peça uma barra mostra quanto falta para chegar lá.',
+      'O preço de atacado vale a partir de 60 peças do mesmo modelo, somando todos os tamanhos. No configurador de cada peça uma barra mostra quanto falta para chegar lá.',
+  },
+  {
+    id: 'pagamento',
+    pergunta: 'Como funciona o pagamento?',
+    resposta: 'O pagamento é feito em duas partes: 50% do valor total do pedido de entrada e o restante no ato da entrega.',
   },
   {
     id: 'precos',
@@ -17,27 +28,15 @@ export const FAQ = [
       'São valores de referência "a partir de", por peça, já com uma personalização simples. Técnica, número de cores, posições da arte e quantidade definem o valor final, que você recebe no orçamento.',
   },
   {
-    id: 'minimo',
-    pergunta: 'Qual é o pedido mínimo?',
-    resposta:
-      'Depende da peça e da técnica de personalização. Informe a quantidade no orçamento e respondemos com as condições exatas para o seu pedido.',
-  },
-  {
-    id: 'arte',
-    pergunta: 'Vocês criam ou ajustam a arte?',
-    resposta:
-      'Sim. A equipe prepara a arte para a técnica escolhida e envia um mockup para aprovação antes de qualquer peça entrar em produção.',
-  },
-  {
     id: 'prazo',
     pergunta: 'Qual é o prazo de produção?',
     resposta:
-      'O prazo é definido no orçamento, conforme quantidade, técnica e agenda de produção. E é cumprido: compromisso com a entrega é um dos pilares da UNIK desde 2016.',
+      'O prazo varia de acordo com a produção de cada cliente (quantidade, técnica e modelos) e é informado no orçamento. Compromisso com a entrega é um dos pilares da UNIK desde 2016.',
   },
   {
-    id: 'como',
-    pergunta: 'Como faço o pedido pelo site?',
+    id: 'reuniao',
+    pergunta: 'Posso ver os produtos pessoalmente antes de fechar?',
     resposta:
-      'Escolha o modelo no catálogo, o tecido, a grade de tamanhos e a personalização, e adicione ao orçamento. Com a lista pronta, um clique envia tudo organizado para o nosso WhatsApp.',
+      'Sim. A UNIK recebe clientes para reuniões presenciais, para mostrar de perto tecidos e peças e tirar todas as dúvidas. É só combinar pelo WhatsApp.',
   },
 ] as const

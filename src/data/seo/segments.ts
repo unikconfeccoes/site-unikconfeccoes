@@ -4,9 +4,11 @@ import type { SegmentPage } from '@/data/seo/types'
  * Páginas de segmento (/uniformes/<SEGMENT_URL>).
  *
  * Uma por SegmentSlug. Produtos citados em `kit` e em blocos `products`
- * são slugs reais de src/data/catalog.ts. Sem prazos, sem preços, sem
- * pedido mínimo: a única regra comercial citada é o preço de atacado a
- * partir de 60 peças do mesmo modelo.
+ * são slugs reais de src/data/catalog.ts. Sem prazos em dias e sem preços.
+ * Regras comerciais confirmadas pelo cliente (set/2026): pedido mínimo de 20
+ * unidades (até dois produtos, pelo menos 10 iguais de cada), atacado a
+ * partir de 60 peças do mesmo modelo, 50% de entrada e o restante na entrega,
+ * prazo conforme a produção de cada cliente, reunião presencial.
  */
 export const SEGMENT_PAGES: readonly SegmentPage[] = [
   /* ------------------------------------------------------ corporativo */
@@ -17,7 +19,7 @@ export const SEGMENT_PAGES: readonly SegmentPage[] = [
     description:
       'Uniformes corporativos em Brasília: polos, camisas sociais e camisetas com logo bordado ou estampado, padronizados para equipes de qualquer tamanho.',
     lead:
-      'Uniforme corporativo é a peça que identifica a sua equipe e comunica a marca antes da primeira palavra. A UNIK produz em Brasília-DF, desde 2016, polos, camisas sociais, camisetas e jalecos com o logo da empresa, com o mesmo padrão de cor e modelagem do primeiro ao último lote. Você monta o pedido pelo site e recebe o orçamento pelo WhatsApp.',
+      'Uniforme corporativo é a peça que identifica a sua equipe e comunica a marca antes da primeira palavra. A UNIK é especializada em uniformes profissionais e produz em Brasília-DF, desde 2016, polos, camisas sociais, camisetas, jaquetas e jalecos com o logo da empresa, com o mesmo padrão de cor e modelagem do primeiro ao último lote. Você monta o pedido pelo site e recebe o orçamento pelo WhatsApp.',
     needs: [
       {
         title: 'Padronização entre unidades e lotes',
@@ -29,7 +31,7 @@ export const SEGMENT_PAGES: readonly SegmentPage[] = [
       },
       {
         title: 'Conforto para o dia inteiro',
-        body: 'Em Brasília o calor e o tempo seco pesam. Malhas leves como a [malha PV](/tecidos/malha-pv) e o [piquet](/tecidos/piquet) respiram e mantêm a aparência depois de muitas lavagens.',
+        body: 'Em Brasília o calor e o tempo seco pesam. Malhas leves como a [malha PV](/tecidos/malha-pv) e o piquet respiram e mantêm a aparência depois de muitas lavagens.',
       },
       {
         title: 'Imagem alinhada ao cargo',
@@ -49,13 +51,13 @@ export const SEGMENT_PAGES: readonly SegmentPage[] = [
       },
       {
         role: 'Equipe de campo e operação',
-        products: ['camiseta-basica', 'camiseta-manga-longa', 'camiseta-uv'],
-        note: 'Para quem trabalha na rua: manga longa e malha com proteção UV ajudam sob o sol do DF.',
+        products: ['camiseta-manga-longa', 'camiseta-uv', 'calca-brim', 'jaqueta-corta-vento'],
+        note: 'Para quem trabalha na rua: manga longa e malha com proteção UV para o sol do DF, calça de brim resistente e corta-vento para as manhãs frias.',
       },
       {
         role: 'Ações internas e endomarketing',
-        products: ['moletom-capuz', 'camiseta-pima'],
-        note: 'Moletom de time e camiseta em algodão pima para kits de boas-vindas, convenções e brindes de fim de ano.',
+        products: ['moletom-capuz', 'jaqueta-poliamida', 'camiseta-pima'],
+        note: 'Moletom de time, jaqueta de poliamida e camiseta de algodão premium para kits de boas-vindas, convenções e brindes de fim de ano.',
       },
     ],
     sections: [
@@ -70,10 +72,10 @@ export const SEGMENT_PAGES: readonly SegmentPage[] = [
           {
             kind: 'ul',
             items: [
-              '**Piquet**: trama em colmeia que dá estrutura à gola e aceita muito bem o bordado. Veja a [Polo Piquet](/catalogo/polo-piquet).',
+              '**Piquet**: trama em colmeia que dá estrutura à gola e aceita muito bem o bordado.',
               '**Malha PV**: leve, seca rápido e amassa pouco. Boa escolha para equipes grandes.',
               '**Tricoline com elastano**: para camisa social que precisa estar alinhada o dia inteiro.',
-              '**Algodão pima**: para peças de brinde e kits em que o toque é o recado.',
+              '**Algodão premium (pima)**: para peças de brinde e kits em que o toque é o recado.',
             ],
           },
           {
@@ -104,12 +106,17 @@ export const SEGMENT_PAGES: readonly SegmentPage[] = [
               'Você escolhe os modelos no [catálogo](/catalogo) e monta o pedido no [orçamento online](/orcamento).',
               'O orçamento chega pelo WhatsApp, com tecido, técnica e posições de personalização definidos.',
               'Antes da produção, enviamos o mockup da peça com o logo para aprovação.',
-              'Com o mockup aprovado, o lote entra em produção com a grade de tamanhos da equipe, de PP a G3.',
+              'Com o mockup aprovado e a entrada de 50% paga, o lote entra em produção com a grade de tamanhos da equipe, de PP a G3. O restante é pago na entrega.',
             ],
           },
           {
             kind: 'p',
-            text: 'O preço de atacado vale a partir de 60 peças do mesmo modelo. Para entender como organizar tamanhos e quantidades, veja [como montar a grade de tamanhos](/guias/como-montar-grade-de-tamanhos) e a página [para empresas](/empresas).',
+            text: 'O pedido mínimo é de 20 unidades, e dá para mesclar dois tipos de produto, com pelo menos 10 unidades iguais de cada (por exemplo, 10 polos e 10 camisas sociais). O preço de atacado vale a partir de 60 peças do mesmo modelo. O prazo varia conforme a produção de cada pedido e é alinhado na conversa do orçamento.',
+          },
+          {
+            kind: 'note',
+            title: 'Reunião presencial',
+            text: 'Para empresas com equipes grandes, recebemos compras, RH e marketing para uma reunião presencial em Brasília: dá para ver tecidos e peças de perto e tirar dúvidas antes de fechar. Veja a página [para empresas](/empresas).',
           },
         ],
       },
@@ -121,11 +128,11 @@ export const SEGMENT_PAGES: readonly SegmentPage[] = [
       },
       {
         q: 'A UNIK faz uniforme corporativo em Brasília?',
-        a: 'Sim. A UNIK é uma confecção de uniformes em Brasília-DF, em atividade desde 2016, e produz polos, camisas sociais, camisetas, moletons e jalecos personalizados para empresas.',
+        a: 'Sim. A UNIK é uma confecção especializada em uniformes profissionais em Brasília-DF, em atividade desde 2016, e produz polos, camisas sociais, camisetas, jaquetas, moletons e jalecos para empresas. Também recebe clientes para reuniões presenciais, para ver as peças de perto.',
       },
       {
-        q: 'Como garantir que a reposição fique igual ao primeiro lote?',
-        a: 'Mantendo o mesmo modelo, tecido, cor e arte registrados no primeiro pedido. Na reposição você informa apenas as quantidades e os tamanhos, e o padrão aprovado é repetido.',
+        q: 'Qual o pedido mínimo de uniformes para empresa?',
+        a: 'O pedido mínimo é de 20 unidades, podendo mesclar dois tipos de produto, com pelo menos 10 unidades iguais de cada. O preço de atacado vale a partir de 60 peças do mesmo modelo. O pagamento é 50% de entrada e o restante na entrega.',
       },
       {
         q: 'Vejo a peça com o logo antes de produzir?',
@@ -220,7 +227,16 @@ export const SEGMENT_PAGES: readonly SegmentPage[] = [
         blocks: [
           {
             kind: 'p',
-            text: 'Você escolhe as peças de cozinha e salão, informa os tamanhos (PP a G3 nas peças vestidas, tamanho único ajustável nos aventais) e monta o pedido no [orçamento online](/orcamento). O orçamento chega pelo WhatsApp e, antes de produzir, você aprova o mockup com o logo e os nomes. O preço de atacado vale a partir de 60 peças do mesmo modelo.',
+            text: 'Você escolhe as peças de cozinha e salão, informa os tamanhos (PP a G3 nas peças vestidas, tamanho único ajustável nos aventais) e monta o pedido no [orçamento online](/orcamento). O orçamento chega pelo WhatsApp e, antes de produzir, você aprova o mockup com o logo e os nomes.',
+          },
+          {
+            kind: 'ul',
+            items: [
+              '**Pedido mínimo**: 20 unidades, podendo mesclar dois produtos com pelo menos 10 iguais de cada (por exemplo, 10 dólmãs e 10 aventais).',
+              '**Atacado**: a partir de 60 peças do mesmo modelo.',
+              '**Pagamento**: 50% de entrada e o restante na entrega.',
+              '**Prazo**: varia conforme a produção de cada pedido e é alinhado na conversa do orçamento.',
+            ],
           },
         ],
       },
@@ -240,7 +256,7 @@ export const SEGMENT_PAGES: readonly SegmentPage[] = [
       },
       {
         q: 'Vocês atendem restaurantes em Brasília?',
-        a: 'Sim. A UNIK é uma confecção de Brasília-DF e produz uniformes completos para restaurantes, bares, hamburguerias e cozinhas profissionais, com orçamento pelo WhatsApp a partir do site.',
+        a: 'Sim. A UNIK é uma confecção de Brasília-DF especializada em uniformes profissionais e produz uniformes completos para restaurantes, bares, hamburguerias e cozinhas profissionais. O pedido mínimo é de 20 unidades, podendo mesclar dois produtos com pelo menos 10 iguais de cada.',
       },
     ],
   },
@@ -285,8 +301,8 @@ export const SEGMENT_PAGES: readonly SegmentPage[] = [
       },
       {
         role: 'Restaurante e bar do hotel',
-        products: ['avental-gabardine', 'camisa-linho'],
-        note: 'Avental de gabardine com friso e camisa de linho, alinhados com a linha da recepção.',
+        products: ['avental-gabardine', 'camisa-linho', 'short-linho'],
+        note: 'Avental de gabardine com friso e camisa de linho, alinhados com a recepção. Em resorts e áreas de piscina, o short de linho completa o conjunto.',
       },
     ],
     sections: [
@@ -331,7 +347,12 @@ export const SEGMENT_PAGES: readonly SegmentPage[] = [
         blocks: [
           {
             kind: 'p',
-            text: 'Monte o pedido por setor no [orçamento online](/orcamento), com modelos, cores e grade de tamanhos de PP a G3. O orçamento chega pelo WhatsApp e o mockup com o bordado é enviado para aprovação antes da produção. O preço de atacado vale a partir de 60 peças do mesmo modelo; saiba mais na página [para empresas](/empresas).',
+            text: 'Monte o pedido por setor no [orçamento online](/orcamento), com modelos, cores e grade de tamanhos de PP a G3. O orçamento chega pelo WhatsApp e o mockup com o bordado é enviado para aprovação antes da produção. O pedido mínimo é de 20 unidades, podendo mesclar dois produtos com pelo menos 10 iguais de cada; o preço de atacado vale a partir de 60 peças do mesmo modelo. O pagamento é 50% de entrada e o restante na entrega, e o prazo varia conforme a produção de cada pedido.',
+          },
+          {
+            kind: 'note',
+            title: 'Reunião presencial',
+            text: 'Hotéis e redes podem agendar uma reunião presencial em Brasília para ver tecidos e peças de perto antes de definir o uniforme de cada setor. Saiba mais na página [para empresas](/empresas).',
           },
         ],
       },
@@ -351,7 +372,7 @@ export const SEGMENT_PAGES: readonly SegmentPage[] = [
       },
       {
         q: 'A UNIK atende hotéis em Brasília?',
-        a: 'Sim. A UNIK é uma confecção de uniformes em Brasília-DF e produz uniformes para hotéis, pousadas e serviços de hospedagem, com orçamento pelo WhatsApp a partir do site.',
+        a: 'Sim. A UNIK é uma confecção especializada em uniformes profissionais em Brasília-DF e produz uniformes para hotéis, pousadas e resorts, com orçamento pelo WhatsApp a partir do site e reunião presencial para ver as peças de perto.',
       },
     ],
   },
@@ -396,8 +417,8 @@ export const SEGMENT_PAGES: readonly SegmentPage[] = [
       },
       {
         role: 'Lojas conceito e marcas de moda',
-        products: ['camiseta-pima', 'avental-jeans'],
-        note: 'Camiseta em algodão pima ou avental de jeans com couro para lojas em que o uniforme também é vitrine.',
+        products: ['camiseta-pima', 'avental-jeans', 'calca-jeans'],
+        note: 'Camiseta de algodão premium, avental de jeans com couro e calça jeans para lojas em que o uniforme também é vitrine.',
       },
     ],
     sections: [
@@ -412,10 +433,10 @@ export const SEGMENT_PAGES: readonly SegmentPage[] = [
           {
             kind: 'ul',
             items: [
-              '**Polo Malha**: três malhas (PV, algodão e suedine). Veja a [Polo Malha](/catalogo/polo-malha).',
+              '**Polo Malha**: três malhas (PV, algodão e suedine).',
               '**Polo Piquet**: trama estruturada, ideal para bordado.',
               '**Camiseta Básica**: de PP a suedine, para qualquer orçamento.',
-              '**Camiseta Pima**: para marcas que querem que o uniforme seja tocado.',
+              '**Camiseta Algodão Premium**: em algodão pima, para marcas que querem que o uniforme seja tocado.',
             ],
           },
           {
@@ -442,7 +463,7 @@ export const SEGMENT_PAGES: readonly SegmentPage[] = [
         blocks: [
           {
             kind: 'p',
-            text: 'Você monta o pedido no [orçamento online](/orcamento), com a grade de tamanhos de cada loja (PP a G3). O orçamento chega pelo WhatsApp e o mockup é aprovado antes da produção. O preço de atacado vale a partir de 60 peças do mesmo modelo, o que costuma ser atingido somando a equipe de várias unidades. Veja também [uniformes no atacado](/guias/uniformes-no-atacado).',
+            text: 'Você monta o pedido no [orçamento online](/orcamento), com a grade de tamanhos de cada loja (PP a G3). O orçamento chega pelo WhatsApp e o mockup é aprovado antes da produção. O pedido mínimo é de 20 unidades, podendo mesclar dois produtos com pelo menos 10 iguais de cada (por exemplo, 10 polos e 10 camisetas). O preço de atacado vale a partir de 60 peças do mesmo modelo, o que costuma ser atingido somando a equipe de várias unidades. O pagamento é 50% de entrada e o restante na entrega. Veja também [uniformes no atacado](/guias/uniformes-no-atacado).',
           },
         ],
       },
@@ -461,8 +482,8 @@ export const SEGMENT_PAGES: readonly SegmentPage[] = [
         a: 'Sim. Camisetas de campanha costumam ser estampadas em serigrafia, quando a arte tem poucas cores, ou em DTF, quando tem degradê ou muitas cores.',
       },
       {
-        q: 'Quais tamanhos estão disponíveis?',
-        a: 'As polos e camisetas são produzidas de PP a G3, o que permite atender toda a equipe com a mesma modelagem.',
+        q: 'Qual o pedido mínimo para uniforme de loja?',
+        a: 'O pedido mínimo é de 20 unidades, podendo mesclar dois tipos de produto, com pelo menos 10 unidades iguais de cada. As polos e camisetas são produzidas de PP a G3, e o preço de atacado vale a partir de 60 peças do mesmo modelo.',
       },
     ],
   },
@@ -502,13 +523,13 @@ export const SEGMENT_PAGES: readonly SegmentPage[] = [
       },
       {
         role: 'Uniforme do dia a dia',
-        products: ['camiseta-basica', 'polo-malha'],
-        note: 'Camiseta ou polo com o brasão da escola, em malha leve e fácil de lavar.',
+        products: ['camiseta-basica', 'polo-malha', 'jaqueta-tactel'],
+        note: 'Camiseta ou polo com o brasão da escola, em malha leve e fácil de lavar, e jaqueta de tactel para os dias mais frios.',
       },
       {
         role: 'Educação física e jogos',
-        products: ['calca-tactel', 'camiseta-basica'],
-        note: 'Calça de tactel leve com estampa na perna, para aula de educação física, interclasse e passeios.',
+        products: ['calca-tactel', 'calca-moletom', 'short-moletom'],
+        note: 'Calça de tactel ou de moletom e short de moletom para aula de educação física, interclasse e passeios.',
       },
     ],
     sections: [
@@ -519,10 +540,11 @@ export const SEGMENT_PAGES: readonly SegmentPage[] = [
           {
             kind: 'ol',
             items: [
-              'A comissão define a cor do moletom (cores base ou cores especiais) e a arte da frente e das costas.',
+              'A comissão define a cor do moletom (cores base ou cores especiais) e a arte da frente e das costas. Se quiser, a turma pode agendar uma reunião presencial para ver as peças de perto.',
               'A turma levanta os tamanhos de cada aluno, de PP a G3.',
               'O pedido é montado no [orçamento online](/orcamento) e o orçamento chega pelo WhatsApp.',
               'O mockup com a arte aplicada é enviado para a turma aprovar antes da produção.',
+              'Com a entrada de 50% paga, o lote entra em produção. O restante é pago na entrega, e o prazo varia conforme a produção de cada pedido.',
             ],
           },
           { kind: 'products', slugs: ['moletom-capuz', 'camiseta-oversized', 'camiseta-basica'] },
@@ -551,7 +573,7 @@ export const SEGMENT_PAGES: readonly SegmentPage[] = [
           },
           {
             kind: 'p',
-            text: 'O preço de atacado vale a partir de 60 peças do mesmo modelo, o que costuma ser atingido somando as turmas da escola. Veja toda a linha de [moletons personalizados](/catalogo/linha/moletons-personalizados).',
+            text: 'O pedido mínimo é de 20 unidades, podendo mesclar dois produtos com pelo menos 10 iguais de cada (por exemplo, 10 moletons e 10 camisetas). O preço de atacado vale a partir de 60 peças do mesmo modelo, o que costuma ser atingido somando as turmas da escola. Veja toda a linha de [casacos e moletons](/catalogo/linha/casacos-e-moletons).',
           },
         ],
       },
@@ -566,8 +588,8 @@ export const SEGMENT_PAGES: readonly SegmentPage[] = [
         a: 'Sim. A lista de nomes nas costas é um dos formatos mais pedidos em moletons de terceirão e de formatura, e aparece no mockup para a turma aprovar antes da produção.',
       },
       {
-        q: 'Quais tamanhos vocês fazem para turmas?',
-        a: 'Os moletons e camisetas são produzidos de PP a G3, o que atende a maior parte das turmas com a mesma modelagem.',
+        q: 'Qual o pedido mínimo para moletom de turma?',
+        a: 'O pedido mínimo é de 20 unidades, podendo mesclar dois produtos com pelo menos 10 iguais de cada. Os moletons e camisetas são produzidos de PP a G3, e o preço de atacado vale a partir de 60 peças do mesmo modelo.',
       },
       {
         q: 'A turma consegue ver o moletom antes de fechar?',
@@ -584,7 +606,7 @@ export const SEGMENT_PAGES: readonly SegmentPage[] = [
     description:
       'Uniforme esportivo personalizado em Brasília: camisetas dry, proteção UV, polos e calças de tactel com sublimação total para times, assessorias e torneios.',
     lead:
-      'Uniforme esportivo personalizado precisa respirar, secar rápido e carregar a arte do time sem pesar. A UNIK produz em Brasília-DF camisetas dry, dry manga longa, UV Fluid, camisetas de pesca, polos dry e calças de tactel, com [sublimação](/personalizacao/sublimacao) total, serigrafia ou DTF. Serve para times, assessorias de corrida, academias e torneios.',
+      'Uniforme esportivo personalizado precisa respirar, secar rápido e carregar a arte do time sem pesar. A UNIK produz em Brasília-DF camisetas dry, UV Fluid, camisetas de pesca, polos dry, shorts, calças e jaquetas esportivas, com [sublimação](/personalizacao/sublimacao) total, serigrafia ou DTF. Serve para times, assessorias de corrida, academias e torneios.',
     needs: [
       {
         title: 'Secagem rápida',
@@ -606,8 +628,8 @@ export const SEGMENT_PAGES: readonly SegmentPage[] = [
     kit: [
       {
         role: 'Time e treino',
-        products: ['camiseta-dry', 'calca-tactel'],
-        note: 'Camiseta dry em quatro malhas técnicas e calça de tactel leve para aquecimento e viagem.',
+        products: ['camiseta-dry', 'short-futebol', 'short-futevolei'],
+        note: 'Camiseta dry em quatro malhas técnicas com short de futebol ou de futevôlei: o uniforme de jogo completo.',
       },
       {
         role: 'Corrida e ar livre',
@@ -621,8 +643,8 @@ export const SEGMENT_PAGES: readonly SegmentPage[] = [
       },
       {
         role: 'Comissão técnica e staff',
-        products: ['polo-dry'],
-        note: 'Polo em dry de seleção para técnicos, organizadores e patrocinadores.',
+        products: ['polo-dry', 'jaqueta-esportiva', 'calca-esportiva', 'jaqueta-corta-vento'],
+        note: 'Polo em dry de seleção, jaqueta e calça esportivas para técnicos, organizadores e viagens da delegação; corta-vento para dias de vento e frio.',
       },
     ],
     sections: [
@@ -658,7 +680,7 @@ export const SEGMENT_PAGES: readonly SegmentPage[] = [
           { kind: 'products', slugs: ['camiseta-dry', 'camiseta-uv', 'camiseta-pesca', 'polo-dry'] },
           {
             kind: 'p',
-            text: 'Veja toda a linha de [camisetas dry fit](/catalogo/linha/camisetas-dry-fit) e peça seu [orçamento](/orcamento). O preço de atacado vale a partir de 60 peças do mesmo modelo, e o mockup é aprovado antes da produção.',
+            text: 'Veja toda a linha de [camisetas dry fit](/catalogo/linha/camisetas-dry-fit) e peça seu [orçamento](/orcamento). O pedido mínimo é de 20 unidades, podendo mesclar dois produtos com pelo menos 10 iguais de cada (por exemplo, 10 camisetas e 10 shorts). O preço de atacado vale a partir de 60 peças do mesmo modelo, e o mockup é aprovado antes da produção. Veja também a linha de [shorts](/catalogo/linha/shorts).',
           },
         ],
       },
@@ -729,7 +751,7 @@ export const SEGMENT_PAGES: readonly SegmentPage[] = [
       {
         role: 'Brindes e kits premium',
         products: ['moletom-capuz', 'camiseta-pima'],
-        note: 'Moletom e camiseta pima para palestrantes, patrocinadores e convidados especiais.',
+        note: 'Moletom e camiseta de algodão premium para palestrantes, patrocinadores e convidados especiais.',
       },
     ],
     sections: [
@@ -764,14 +786,14 @@ export const SEGMENT_PAGES: readonly SegmentPage[] = [
               'Defina quantos grupos (público, staff, patrocinadores) e a cor de cada um.',
               'Escolha os modelos no [catálogo](/catalogo) e monte o pedido no [orçamento online](/orcamento).',
               'Receba o orçamento pelo WhatsApp e aprove o mockup com a arte aplicada.',
-              'Com a aprovação, o lote entra em produção com a grade de PP a G3.',
+              'Com a aprovação e a entrada de 50% paga, o lote entra em produção com a grade de PP a G3. O restante é pago na entrega.',
             ],
           },
           { kind: 'products', slugs: ['camiseta-basica', 'camiseta-dry', 'polo-piquet', 'moletom-capuz'] },
           {
             kind: 'note',
             title: 'Na prática',
-            text: 'O prazo de cada pedido depende do volume, da técnica e da arte. Por isso, peça o orçamento assim que a data do evento estiver definida e informe essa data na conversa.',
+            text: 'O prazo varia conforme a produção de cada pedido (volume, técnica e arte). Por isso, peça o orçamento assim que a data do evento estiver definida e informe essa data na conversa.',
           },
         ],
       },
@@ -786,8 +808,8 @@ export const SEGMENT_PAGES: readonly SegmentPage[] = [
         a: 'Quando há muitos logos coloridos, o DTF é a melhor escolha, porque reproduz qualquer número de cores sem custo extra por cor. Em malha de poliéster clara, a sublimação também é uma opção.',
       },
       {
-        q: 'A partir de quantas peças vale o preço de atacado?',
-        a: 'O preço de atacado vale a partir de 60 peças do mesmo modelo. O orçamento final depende também da técnica, das cores e das posições de estampa.',
+        q: 'Qual o pedido mínimo de camisetas para evento?',
+        a: 'O pedido mínimo é de 20 unidades, podendo mesclar dois produtos com pelo menos 10 iguais de cada. O preço de atacado vale a partir de 60 peças do mesmo modelo, e o valor final depende também da técnica, das cores e das posições de estampa.',
       },
       {
         q: 'Vocês fazem camisetas para eventos em Brasília?',
@@ -804,11 +826,11 @@ export const SEGMENT_PAGES: readonly SegmentPage[] = [
     description:
       'Uniforme para clínica em Brasília: jaleco em brim com nome bordado, polo em piquet e camisa social para consultórios, estética e serviços.',
     lead:
-      'Uniforme para clínica precisa transmitir cuidado, limpeza e confiança logo no primeiro contato com o paciente. A UNIK produz em Brasília-DF jalecos em brim leve com nome bordado, polos em piquet e camisas sociais para clínicas, consultórios, laboratórios, estética e serviços. Recepção e equipe técnica saem com o mesmo padrão visual.',
+      'Uniforme para clínica precisa transmitir cuidado, limpeza e confiança logo no primeiro contato com o paciente. A UNIK produz em Brasília-DF jalecos em brim, gabardine e oxford com nome bordado, polos em piquet e camisas sociais para clínicas, consultórios, laboratórios, estética e serviços. Recepção e equipe técnica saem com o mesmo padrão visual.',
     needs: [
       {
         title: 'Aparência limpa e profissional',
-        body: 'O jaleco é a primeira coisa que o paciente vê. O [brim](/tecidos/brim) leve tem caimento limpo e é fácil de passar.',
+        body: 'O jaleco é a primeira coisa que o paciente vê. O brim leve tem caimento limpo e é fácil de passar.',
       },
       {
         title: 'Identificação do profissional',
@@ -827,7 +849,7 @@ export const SEGMENT_PAGES: readonly SegmentPage[] = [
       {
         role: 'Médicos, dentistas e equipe técnica',
         products: ['jaleco-brim'],
-        note: 'Jaleco em brim leve, com bolsos funcionais e nome bordado no peito.',
+        note: 'Jaleco Profissional em brim, gabardine ou oxford, com bolsos funcionais e nome bordado no peito.',
       },
       {
         role: 'Recepção e atendimento',
@@ -847,7 +869,7 @@ export const SEGMENT_PAGES: readonly SegmentPage[] = [
         blocks: [
           {
             kind: 'p',
-            text: 'O [Jaleco Brim](/catalogo/jaleco-brim) é produzido em brim leve: resistente, fácil de passar e com caimento limpo. A personalização mais comum é o nome do profissional bordado no peito, com o logo da clínica ao lado ou na manga.',
+            text: 'O [Jaleco Profissional](/catalogo/jaleco-brim) é produzido em três tecidos: [brim](/tecidos/brim), resistente e fácil de passar; [gabardine](/tecidos/gabardine), de caimento mais fluido; e oxford, de trama firme. A personalização mais comum é o nome do profissional bordado no peito, com o logo da clínica ao lado ou na manga.',
           },
           {
             kind: 'ul',
@@ -875,7 +897,7 @@ export const SEGMENT_PAGES: readonly SegmentPage[] = [
           { kind: 'products', slugs: ['jaleco-brim', 'polo-piquet', 'camisa-social'] },
           {
             kind: 'p',
-            text: 'Monte o pedido no [orçamento online](/orcamento), com a lista de nomes e tamanhos de PP a G3. O orçamento chega pelo WhatsApp e o mockup é aprovado antes da produção. Veja também a página [para empresas](/empresas).',
+            text: 'Monte o pedido no [orçamento online](/orcamento), com a lista de nomes e tamanhos de PP a G3. O orçamento chega pelo WhatsApp e o mockup é aprovado antes da produção. O pedido mínimo é de 20 unidades, podendo mesclar dois produtos com pelo menos 10 iguais de cada (por exemplo, 10 jalecos e 10 polos); o pagamento é 50% de entrada e o restante na entrega. Clínicas também podem agendar uma reunião presencial para ver os tecidos de perto. Veja a página [para empresas](/empresas).',
           },
         ],
       },
@@ -883,7 +905,7 @@ export const SEGMENT_PAGES: readonly SegmentPage[] = [
     faq: [
       {
         q: 'Qual o melhor tecido para jaleco?',
-        a: 'O brim leve é uma das escolhas mais indicadas para jaleco, porque é resistente, fácil de passar e mantém o caimento limpo mesmo com lavagens frequentes.',
+        a: 'Depende da rotina. O brim é resistente e fácil de passar, a gabardine tem caimento mais fluido e o oxford tem trama firme. A UNIK produz o jaleco nos três tecidos, e o brim é o mais indicado para quem lava a peça com muita frequência.',
       },
       {
         q: 'Dá para bordar o nome de cada profissional no jaleco?',
@@ -895,7 +917,7 @@ export const SEGMENT_PAGES: readonly SegmentPage[] = [
       },
       {
         q: 'A UNIK faz uniformes para clínicas em Brasília?',
-        a: 'Sim. A UNIK é uma confecção de uniformes em Brasília-DF e produz jalecos, polos e camisas sociais personalizados para clínicas, consultórios, laboratórios e estética.',
+        a: 'Sim. A UNIK é uma confecção especializada em uniformes profissionais em Brasília-DF e produz jalecos, polos e camisas sociais para clínicas, consultórios, laboratórios e estética. O pedido mínimo é de 20 unidades, podendo mesclar dois produtos com pelo menos 10 iguais de cada.',
       },
     ],
   },

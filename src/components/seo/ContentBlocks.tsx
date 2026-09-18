@@ -142,6 +142,7 @@ export function PriceTable({ category }: { category?: CategorySlug }) {
             PRODUCTS.filter((p) => p.category === c.slug).flatMap((p) =>
               p.fabrics.map((f, i) => {
                 const price = fabricPrice(f)
+                if (!price) return null
                 return (
                   <tr key={`${p.slug}-${f.id}`}>
                     <th scope="row">{i === 0 ? <Link href={ROUTES.produto(p.slug)}>{p.name}</Link> : null}</th>
@@ -162,6 +163,10 @@ export function PriceTable({ category }: { category?: CategorySlug }) {
 }
 
 export function minPriceOf(slugs: readonly string[]): number | null {
-  const prices = slugs.map((s) => PRODUCT_BY_SLUG[s]).filter((p) => p !== undefined).map(startingPrice)
+  const prices = slugs
+    .map((s) => PRODUCT_BY_SLUG[s])
+    .filter((p) => p !== undefined)
+    .map(startingPrice)
+    .filter((p) => p !== null)
   return prices.length ? Math.min(...prices) : null
 }

@@ -8,6 +8,7 @@ import { Cta } from '@/components/primitives/Cta'
 import { Display, Eyebrow, Label, Serif } from '@/components/primitives/Typography'
 import { CATEGORIES, categoryStartingPrice, productsInCategory } from '@/data/catalog'
 import { formatBRL } from '@/lib/format'
+import { ROUTES } from '@/data/seo/routes'
 import { useGsapOn } from '@/hooks/useGsap'
 import { scheduleRefresh } from '@/lib/motion/refresh'
 import styles from './Categorias.module.css'
@@ -92,7 +93,7 @@ export function Categorias() {
           <div className={styles.titleBlock}>
             <Eyebrow index="02">O mix</Eyebrow>
             <Display id="categorias-title" size="2">
-              Oito linhas, <Serif>uma</Serif> assinatura
+              Nove linhas, <Serif>uma</Serif> assinatura
             </Display>
           </div>
           <div className={styles.headAside}>
@@ -112,7 +113,7 @@ export function Categorias() {
               const models = productsInCategory(cat.slug).length
               return (
                 <li key={cat.slug} className={styles.item}>
-                  <Link href={`/catalogo?categoria=${cat.slug}`} className={styles.card} data-cursor="Ver linha">
+                  <Link href={ROUTES.linha(cat.slug)} className={styles.card} data-cursor="Ver linha">
                     <div className={styles.cardTop}>
                       <Label size="xs" numeric className={styles.index}>
                         {String(i + 1).padStart(2, '0')} / {String(CATEGORIES.length).padStart(2, '0')}
@@ -127,11 +128,15 @@ export function Categorias() {
                     <div className={styles.cardBody}>
                       <h3 className={styles.name}>{cat.name}</h3>
                       <p className={styles.desc}>{cat.description}</p>
-                      {price !== null ? (
-                        <p className={styles.price}>
-                          <span>a partir de</span> <strong className="u-tnum">{formatBRL(price)}</strong>
-                        </p>
-                      ) : null}
+                      <p className={styles.price}>
+                        {price !== null ? (
+                          <>
+                            <span>a partir de</span> <strong className="u-tnum">{formatBRL(price)}</strong>
+                          </>
+                        ) : (
+                          <strong>Sob consulta</strong>
+                        )}
+                      </p>
                     </div>
                   </Link>
                 </li>

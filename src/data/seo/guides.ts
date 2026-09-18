@@ -6,7 +6,8 @@ import type { Guide } from '@/data/seo/types'
  * Um guia por slug de GUIDE_SLUGS, na mesma ordem. Regras do texto:
  * primeira frase de cada seção responde o título; nada de travessão;
  * nenhum preço escrito à mão (a tabela `priceTable` vem da planilha);
- * nenhum prazo, pedido mínimo ou número de clientes que a UNIK não confirmou.
+ * nenhum prazo em dias nem número de clientes. Pedido mínimo (20 unidades),
+ * pagamento (50% de entrada) e reunião presencial foram confirmados pela UNIK.
  */
 
 const UPDATED = '2026-09-18'
@@ -23,7 +24,7 @@ export const GUIDES: readonly Guide[] = [
     readingMinutes: 6,
     updated: UPDATED,
     lead:
-      'Escolher uniforme para empresa é decidir, nesta ordem, **para que a peça serve, onde ela vai ser usada e como ela representa a marca**. Este guia organiza a decisão em seis passos, pensados para quem compra para equipes grandes: compras, RH, marketing e gestores de operação.',
+      'Escolher uniforme para empresa é decidir, nesta ordem, **para que a peça serve, onde ela vai ser usada e como ela representa a marca**. Este guia da UNIK, confecção especializada em uniformes profissionais em Brasília-DF desde 2016, organiza a decisão em seis passos para quem compra para equipes grandes: compras, RH, marketing e gestores de operação.',
     sections: [
       {
         id: 'funcao-e-ambiente',
@@ -38,6 +39,7 @@ export const GUIDES: readonly Guide[] = [
             items: [
               '**Atendimento e escritório:** peças que transmitem cuidado e amassam pouco, como polo piquet e camisa social.',
               '**Cozinha e produção:** tecidos que aguentam calor e lavagem frequente, como o two way da dólmã e o pied de poule da calça.',
+              '**Manutenção, logística e serviços:** peças resistentes, como calça em brim e jaleco profissional.',
               '**Campo, sol e esporte:** malhas técnicas que respiram e secam rápido, como o dry e o UV fluid.',
               '**Eventos e ações pontuais:** camisetas com boa relação custo-volume.',
             ],
@@ -78,9 +80,9 @@ export const GUIDES: readonly Guide[] = [
         blocks: [
           {
             kind: 'p',
-            text: 'O modelo é a peça em si: polo, camiseta, camisa social, dólmã, jaleco, moletom ou calça. A regra prática é usar o modelo mais formal para quem atende o cliente de perto e o mais funcional para quem trabalha com esforço físico.',
+            text: 'O modelo é a peça em si: polo, camiseta, camisa social, dólmã, jaleco, calça, short ou casaco. A regra prática é usar o modelo mais formal para quem atende o cliente de perto e o mais funcional para quem trabalha com esforço físico.',
           },
-          { kind: 'products', slugs: ['polo-piquet', 'polo-malha', 'camisa-social', 'camiseta-basica'] },
+          { kind: 'products', slugs: ['polo-piquet', 'camisa-social', 'camiseta-basica', 'calca-brim', 'jaleco-brim'] },
         ],
       },
       {
@@ -139,8 +141,12 @@ export const GUIDES: readonly Guide[] = [
           },
           {
             kind: 'note',
-            title: 'Atacado',
-            text: 'O preço de atacado vale a partir de 60 peças do mesmo modelo, somando todos os tamanhos. Entenda o que muda no preço em [quanto custa uniforme personalizado](/guias/quanto-custa-uniforme-personalizado).',
+            title: 'Pedido mínimo e atacado',
+            text: 'O pedido mínimo é de 20 unidades, podendo mesclar dois tipos de produto com pelo menos 10 unidades iguais de cada. O preço de atacado vale a partir de 60 peças do mesmo modelo, somando todos os tamanhos. Entenda o que muda no preço em [quanto custa uniforme personalizado](/guias/quanto-custa-uniforme-personalizado).',
+          },
+          {
+            kind: 'p',
+            text: 'O pagamento é de 50% do valor total na entrada e o restante no ato da entrega, e o prazo varia conforme a produção de cada pedido. Para equipes grandes, a UNIK também recebe a sua empresa em Brasília para uma reunião presencial: dá para ver os produtos de perto e tirar dúvidas antes de fechar. Saiba mais em [uniformes para empresas](/empresas).',
           },
         ],
       },
@@ -387,11 +393,21 @@ export const GUIDES: readonly Guide[] = [
       },
       {
         id: 'quantidade',
-        title: 'Quantidade e atacado a partir de 60 peças',
+        title: 'Quantidade: pedido mínimo de 20 e atacado a partir de 60 peças',
         blocks: [
           {
             kind: 'p',
-            text: 'A quantidade reduz o preço por peça, e na UNIK o preço de atacado vale a partir de 60 peças do mesmo modelo, somando todos os tamanhos da grade. Abaixo disso, vale o preço de varejo.',
+            text: 'A quantidade define duas coisas diferentes: se o pedido pode ser produzido e qual preço ele paga. Na UNIK, o mínimo para produzir é de 20 unidades, e o preço de atacado vale a partir de 60 peças do mesmo modelo, somando todos os tamanhos da grade.',
+          },
+          {
+            kind: 'table',
+            caption: 'Pedido mínimo e preço de atacado',
+            head: ['Regra', 'Quantidade', 'Como funciona'],
+            rows: [
+              ['Pedido mínimo', '20 unidades', 'Pode mesclar dois tipos de produto, com pelo menos 10 unidades iguais de cada'],
+              ['Preço de varejo', 'De 20 a 59 peças do modelo', 'O pedido é produzido, com o preço por peça de varejo'],
+              ['Preço de atacado', '60 peças ou mais do mesmo modelo', 'Vale o preço "a partir de" da tabela, somando todos os tamanhos'],
+            ],
           },
           {
             kind: 'p',
@@ -413,6 +429,10 @@ export const GUIDES: readonly Guide[] = [
             text: 'O preço exato sai do orçamento montado no site, com modelo, tecido, grade e personalização definidos. A lista é enviada organizada para o WhatsApp da UNIK com um clique.',
           },
           {
+            kind: 'p',
+            text: 'Peças novas do catálogo, como shorts, casacos e algumas calças, aparecem como "sob consulta" e têm o valor informado no orçamento. O pagamento é de 50% do valor total na entrada e o restante no ato da entrega.',
+          },
+          {
             kind: 'ol',
             items: [
               'Escolha os modelos no [catálogo](/catalogo).',
@@ -431,15 +451,15 @@ export const GUIDES: readonly Guide[] = [
       },
       {
         q: 'A partir de quantas peças vale o preço de atacado?',
-        a: 'A partir de 60 peças do mesmo modelo, somando todos os tamanhos da grade. Abaixo disso vale o preço de varejo.',
+        a: 'A partir de 60 peças do mesmo modelo, somando todos os tamanhos da grade. Entre o pedido mínimo de 20 unidades e 59 peças do modelo, vale o preço de varejo.',
+      },
+      {
+        q: 'Qual é o pedido mínimo de uniformes?',
+        a: 'O pedido mínimo na UNIK é de 20 unidades, podendo mesclar dois tipos de produto com pelo menos 10 unidades iguais de cada. O preço de atacado começa em 60 peças do mesmo modelo.',
       },
       {
         q: 'O que mais encarece um uniforme personalizado?',
         a: 'Tecidos nobres, modelos com mais costura (como dólmã e camisa social), muitas cores em serigrafia e várias posições de personalização são os fatores que mais elevam o valor por peça.',
-      },
-      {
-        q: 'Qual é o uniforme mais barato?',
-        a: 'Em geral, a camiseta básica em malha PP ou PV com personalização em uma posição é a opção de menor custo por peça, especialmente no atacado.',
       },
       {
         q: 'Como faço para saber o preço exato?',
@@ -552,6 +572,10 @@ export const GUIDES: readonly Guide[] = [
           },
           {
             kind: 'p',
+            text: 'Já o pedido mínimo para produzir é de 20 unidades, podendo mesclar dois tipos de produto com pelo menos 10 unidades iguais de cada. Uma grade pequena, portanto, pode ser produzida, só não alcança o preço de atacado.',
+          },
+          {
+            kind: 'p',
             text: 'Se um modelo ficar perto das 60 peças, vale revisar a reserva de reposição ou incluir outro setor que use a mesma peça. No configurador, uma barra mostra quanto falta para chegar ao atacado. Entenda o cálculo completo em [uniformes no atacado](/guias/uniformes-no-atacado).',
           },
         ],
@@ -605,7 +629,7 @@ export const GUIDES: readonly Guide[] = [
             head: ['Ambiente', 'Parte de cima', 'Parte de baixo', 'Avental', 'Personalização'],
             rows: [
               ['Cozinha', 'Dólmã em two way', 'Calça pied de poule', 'Avental two way largo', 'Nome e logo bordados'],
-              ['Salão', 'Camisa social, linho ou polo', 'Calça da casa', 'Avental gabardine ou jeans', 'Logo bordado no peito'],
+              ['Salão', 'Camisa social, linho ou polo', 'Calça em brim ou jeans', 'Avental gabardine ou jeans', 'Logo bordado no peito'],
             ],
           },
         ],
@@ -640,6 +664,7 @@ export const GUIDES: readonly Guide[] = [
               '[Camisa linho](/catalogo/camisa-linho): fresca e elegante, em manga longa ou curta.',
               '[Avental gabardine](/catalogo/avental-gabardine): com friso e bolso, o clássico do salão.',
               '[Avental jeans e couro](/catalogo/avental-jeans): a cara de cervejarias, hamburguerias e casas autorais.',
+              '[Calça brim](/catalogo/calca-brim) ou [calça jeans](/catalogo/calca-jeans): completam o visual do salão com resistência.',
             ],
           },
           { kind: 'products', slugs: ['camisa-social', 'camisa-linho', 'avental-gabardine', 'avental-jeans'] },
@@ -675,6 +700,10 @@ export const GUIDES: readonly Guide[] = [
           {
             kind: 'p',
             text: 'Veja a linha completa de [dólmãs e aventais](/catalogo/linha/dolmas-e-aventais), a página de [uniformes para restaurantes](/uniformes/uniformes-para-restaurantes) e monte o [orçamento](/orcamento).',
+          },
+          {
+            kind: 'p',
+            text: 'O pedido mínimo é de 20 unidades e pode mesclar dois tipos de produto, com pelo menos 10 unidades iguais de cada: por exemplo, 10 dólmãs e 10 aventais. Redes com várias casas também podem agendar uma reunião presencial na UNIK, em Brasília, para ver as peças de perto.',
           },
         ],
       },
@@ -759,9 +788,9 @@ export const GUIDES: readonly Guide[] = [
           },
           {
             kind: 'p',
-            text: 'Além das malhas nobres, como [algodão pima](/tecidos/algodao-pima) e [suedine](/tecidos/suedine), o Lab trabalha com tecidos técnicos de alta performance para linhas esportivas e de compressão.',
+            text: 'Além das malhas nobres, como [algodão pima](/tecidos/algodao-pima), egípcio, peruano e [suedine](/tecidos/suedine), o Lab trabalha com tecidos técnicos de alta performance para linhas esportivas, de compressão, shorts e corta-ventos.',
           },
-          { kind: 'products', slugs: ['camiseta-oversized', 'camiseta-pima', 'moletom-capuz'] },
+          { kind: 'products', slugs: ['camiseta-oversized', 'camiseta-pima', 'moletom-capuz', 'jaqueta-corta-vento'] },
         ],
       },
       {
@@ -832,14 +861,14 @@ export const GUIDES: readonly Guide[] = [
   {
     slug: 'uniformes-no-atacado',
     title: 'Uniformes no atacado: como funciona a compra em volume',
-    seoTitle: 'Uniformes no atacado: como funciona a partir de 60 peças',
+    seoTitle: 'Uniformes no atacado: pedido mínimo e preço por volume',
     description:
-      'Entenda o atacado a partir de 60 peças do mesmo modelo, como a grade soma, como planejar volume e padronizar uniformes em empresas grandes.',
+      'Pedido mínimo de 20 unidades e atacado a partir de 60 peças do mesmo modelo: entenda a conta, a grade e como planejar volume na sua empresa.',
     kicker: 'Atacado',
-    readingMinutes: 5,
+    readingMinutes: 6,
     updated: UPDATED,
     lead:
-      'Na UNIK, o preço de atacado vale **a partir de 60 peças do mesmo modelo, somando todos os tamanhos**. Este guia explica como a conta funciona e como empresas com equipes grandes planejam volume, padronização e reposição.',
+      'Na UNIK, dois números organizam a compra: o **pedido mínimo de 20 unidades**, que define se o pedido pode ser produzido, e o **preço de atacado a partir de 60 peças do mesmo modelo**, somando todos os tamanhos. Este guia explica as duas regras e como empresas com equipes grandes planejam volume, padronização e reposição.',
     sections: [
       {
         id: 'o-que-significa',
@@ -851,7 +880,32 @@ export const GUIDES: readonly Guide[] = [
           },
           {
             kind: 'p',
-            text: 'Os preços "a partir de" mostrados no site já são valores de atacado. Abaixo de 60 peças do modelo, vale o preço de varejo. No configurador de cada peça, uma barra mostra quanto falta para chegar ao atacado.',
+            text: 'Os preços "a partir de" mostrados no site já são valores de atacado. Entre o pedido mínimo e 59 peças do modelo, vale o preço de varejo. No configurador de cada peça, uma barra mostra quanto falta para chegar ao atacado.',
+          },
+        ],
+      },
+      {
+        id: 'pedido-minimo',
+        title: 'Pedido mínimo e atacado não são a mesma coisa',
+        blocks: [
+          {
+            kind: 'p',
+            text: 'O pedido mínimo é a menor quantidade que a UNIK produz, e o atacado é a quantidade a partir da qual o preço por peça cai. São duas regras diferentes, e entender a diferença evita surpresa no orçamento.',
+          },
+          {
+            kind: 'table',
+            caption: 'Pedido mínimo e preço de atacado na UNIK',
+            head: ['Regra', 'Quantidade', 'O que define'],
+            rows: [
+              ['Pedido mínimo', '20 unidades', 'Se o pedido pode ser produzido'],
+              ['Mescla no mínimo', 'Até dois tipos de produto', 'Pelo menos 10 unidades iguais de cada produto'],
+              ['Preço de atacado', '60 peças ou mais do mesmo modelo', 'O menor preço por peça, somando todos os tamanhos'],
+            ],
+          },
+          {
+            kind: 'note',
+            title: 'Exemplo',
+            text: 'Um pedido de 10 polos e 10 camisetas atinge o mínimo de 20 unidades e pode ser produzido, com preço de varejo. Já 60 polos do mesmo modelo, em tamanhos variados, entram no preço de atacado.',
           },
         ],
       },
@@ -869,8 +923,8 @@ export const GUIDES: readonly Guide[] = [
             head: ['Pedido', 'Soma', 'Atacado?'],
             rows: [
               ['Polo Piquet: 10 P, 20 M, 20 G, 10 GG', '60 peças do mesmo modelo', 'Sim'],
-              ['Camiseta Básica: 5 P, 15 M, 15 G, 5 GG', '40 peças do mesmo modelo', 'Não, faltam 20'],
-              ['30 Polos Piquet e 30 Camisetas Básicas', '30 de cada modelo', 'Não, cada modelo conta separado'],
+              ['Camiseta Básica: 5 P, 15 M, 15 G, 5 GG', '40 peças do mesmo modelo', 'Não, faltam 20 (preço de varejo)'],
+              ['30 Polos Piquet e 30 Camisetas Básicas', '30 de cada modelo', 'Não, cada modelo conta separado (preço de varejo)'],
             ],
           },
           {
@@ -897,6 +951,15 @@ export const GUIDES: readonly Guide[] = [
               'Some a reserva para reposição e novas contratações.',
               'Planeje o pedido com antecedência, sem depender de urgência.',
             ],
+          },
+          {
+            kind: 'p',
+            text: 'O prazo varia conforme a produção de cada cliente e é definido no orçamento, por isso planejar cedo faz diferença. O pagamento é de 50% do valor total na entrada e o restante no ato da entrega.',
+          },
+          {
+            kind: 'note',
+            title: 'Reunião presencial',
+            text: 'Para empresas com equipes grandes, a UNIK recebe clientes em Brasília para reuniões presenciais: dá para ver os produtos de perto, comparar tecidos e tirar dúvidas antes de fechar o pedido.',
           },
         ],
       },
@@ -937,15 +1000,15 @@ export const GUIDES: readonly Guide[] = [
     faq: [
       {
         q: 'A partir de quantas peças é atacado?',
-        a: 'A partir de 60 peças do mesmo modelo, somando todos os tamanhos da grade. Abaixo disso vale o preço de varejo.',
+        a: 'A partir de 60 peças do mesmo modelo, somando todos os tamanhos da grade. Entre o pedido mínimo de 20 unidades e 59 peças do modelo, vale o preço de varejo.',
       },
       {
         q: 'Modelos diferentes somam para o atacado?',
         a: 'Não. A conta é por modelo: 30 polos e 30 camisetas são dois pedidos de 30 peças, e nenhum deles chega ao atacado sozinho.',
       },
       {
-        q: 'Tamanhos diferentes somam para o atacado?',
-        a: 'Sim. Todos os tamanhos do mesmo modelo, do PP ao G3, entram na mesma soma.',
+        q: 'Qual é o pedido mínimo da UNIK?',
+        a: 'O pedido mínimo é de 20 unidades, podendo mesclar dois tipos de produto com pelo menos 10 unidades iguais de cada. O preço de atacado começa em 60 peças do mesmo modelo, somando todos os tamanhos, do PP ao G3.',
       },
       {
         q: 'Os preços do site já são de atacado?',
@@ -1003,22 +1066,25 @@ export const GUIDES: readonly Guide[] = [
             caption: 'Tecidos para uniforme por uso',
             head: ['Tecido', 'Destaque', 'Uso ideal', 'Peças'],
             rows: [
-              ['Malha PV', 'Leve, fácil de lavar', 'Uniforme do dia a dia', 'Polo, camiseta'],
+              ['Malha PV (poliviscose)', 'Leve, fácil de lavar', 'Uniforme do dia a dia', 'Polo, camiseta'],
               ['Malha PP', 'A mais econômica', 'Eventos e grandes volumes', 'Camiseta'],
-              ['Algodão', 'Toque natural', 'Conforto no uso diário', 'Polo, camiseta, oversized'],
-              ['Algodão pima', 'Fibra extralonga, toque sedoso', 'Marcas e peças premium', 'Camiseta'],
+              ['Algodão fio 30.1', 'Toque natural', 'Conforto no uso diário', 'Polo, camiseta, oversized'],
+              ['Algodão com elastano', 'Veste junto ao corpo', 'Camisetas e polos ajustados', 'Camiseta, polo'],
+              ['Algodão pima, egípcio e peruano', 'Fibra longa, toque sedoso', 'Marcas e peças premium', 'Camiseta algodão premium'],
               ['Suedine', 'Toque aveludado', 'Acabamento premium', 'Polo, camiseta'],
               ['Piquet', 'Trama estruturada', 'Atendimento e corporativo', 'Polo'],
-              ['Dry fit', 'Seca rápido, respira', 'Esporte e equipes de campo', 'Camiseta, polo'],
+              ['Dry fit (poliéster, elastano, poliamida)', 'Seca rápido, respira', 'Esporte e equipes de campo', 'Camiseta, polo'],
               ['UV fluid', 'Proteção UV', 'Trabalho ao sol', 'Manga longa'],
               ['Tricoline e fustão', 'Amassa pouco, aspecto nobre', 'Recepção e salão', 'Camisa social'],
-              ['Linho', 'Fresco e elegante', 'Salão e eventos em clima quente', 'Camisa'],
+              ['Linho', 'Fresco e elegante', 'Salão e eventos em clima quente', 'Camisa, short'],
               ['Two way', 'Transpira, não amassa', 'Cozinha profissional', 'Dólmã, avental'],
               ['Pied de poule', 'Padrão da cozinha', 'Cozinha profissional', 'Calça'],
-              ['Brim', 'Resistente, fácil de passar', 'Saúde e serviços', 'Jaleco'],
-              ['Gabardine', 'Estruturado', 'Salão', 'Avental'],
-              ['Tactel', 'Leve, seca rápido', 'Equipes esportivas', 'Calça'],
-              ['Moletom', 'Flanelado e quente', 'Turmas e dias frios', 'Moletom com capuz'],
+              ['Brim', 'Resistente, fácil de passar', 'Saúde, manutenção e serviços', 'Jaleco, calça'],
+              ['Gabardine', 'Estruturado', 'Salão e saúde', 'Avental, jaleco'],
+              ['Oxford', 'Leve e de fácil manutenção', 'Saúde e serviços', 'Jaleco'],
+              ['Jeans', 'Resistente e casual', 'Varejo, salão e operação', 'Calça, avental'],
+              ['Tactel', 'Leve, seca rápido', 'Equipes esportivas', 'Calça, casaco'],
+              ['Moletom', 'Flanelado e quente', 'Turmas e dias frios', 'Casaco, calça, short'],
             ],
           },
         ],
@@ -1062,8 +1128,13 @@ export const GUIDES: readonly Guide[] = [
           },
           {
             kind: 'p',
-            text: 'Na cozinha, o [two way](/tecidos/two-way) é o tecido da dólmã e do avental, e o [pied de poule](/tecidos/pied-de-poule) é o padrão da calça. Na saúde, o [brim](/tecidos/brim) dá ao jaleco caimento limpo e resistência.',
+            text: 'Na cozinha, o [two way](/tecidos/two-way) é o tecido da dólmã e do avental, e o [pied de poule](/tecidos/pied-de-poule) é o padrão da calça. Na saúde, o jaleco profissional sai em [brim](/tecidos/brim), [gabardine](/tecidos/gabardine) ou oxford, e o brim também veste calças de manutenção e serviços.',
           },
+          {
+            kind: 'p',
+            text: 'Para dias frios e equipes esportivas, o [moletom](/tecidos/moletom) aparece em casacos, calças e shorts, e o [tactel](/tecidos/tactel) em calças e casacos leves. O [jeans](/tecidos/jeans) completa a linha em calças e aventais.',
+          },
+          { kind: 'products', slugs: ['dolma', 'jaleco-brim', 'calca-brim', 'jaqueta-tactel'] },
         ],
       },
       {

@@ -8,6 +8,7 @@ import { Display, Eyebrow, Serif } from '@/components/primitives/Typography'
 import { PRODUCTS, SEGMENTS, type SegmentSlug } from '@/data/catalog'
 import { useGsapOn } from '@/hooks/useGsap'
 import { useHasPointer, usePrefersReducedMotion } from '@/hooks/useMediaQuery'
+import { ROUTES } from '@/data/seo/routes'
 import styles from './Segmentos.module.css'
 
 const COUNT: Record<SegmentSlug, number> = Object.fromEntries(
@@ -73,7 +74,7 @@ export function Segmentos() {
           {SEGMENTS.map((seg, i) => (
             <li key={seg.slug} className={styles.row}>
               <Link
-                href={`/catalogo?segmento=${seg.slug}`}
+                href={ROUTES.segmento(seg.slug)}
                 className={styles.link}
                 data-active={active === seg.slug || undefined}
                 data-dim={(active !== null && active !== seg.slug) || undefined}

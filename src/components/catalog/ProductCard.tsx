@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { Media } from '@/components/primitives/Media'
 import { CATEGORY_BY_SLUG, startingPrice, type Product } from '@/data/catalog'
-import { formatBRL } from '@/lib/format'
+import { formatPrice } from '@/lib/format'
 import styles from './ProductCard.module.css'
 
 type ProductCardProps = {
@@ -29,11 +29,17 @@ export function ProductCard({ product, index, sizes = '(min-width: 1280px) 22vw,
         <span className={styles.category}>{category.name}</span>
         <h3 className={styles.name}>{product.name}</h3>
         <p className={styles.summary}>{product.summary}</p>
-        <p className={styles.price}>
-          <span className={styles.from}>a partir de</span>
-          <strong className="u-tnum">{formatBRL(startingPrice(product))}</strong>
-          <span className={styles.unit}>/ peça</span>
-        </p>
+        {startingPrice(product) !== null ? (
+          <p className={styles.price}>
+            <span className={styles.from}>a partir de</span>
+            <strong className="u-tnum">{formatPrice(startingPrice(product))}</strong>
+            <span className={styles.unit}>/ peça</span>
+          </p>
+        ) : (
+          <p className={styles.price}>
+            <strong>Sob consulta</strong>
+          </p>
+        )}
       </div>
     </Link>
   )

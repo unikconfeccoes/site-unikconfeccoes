@@ -42,6 +42,27 @@
   border-block-start: 1px solid var(--rule-strong);
 }
 
+.rule {
+  display: grid;
+  gap: 0.3rem;
+  padding: var(--space-sm) var(--space-md);
+  border-inline-start: 5px solid #d08a5c;
+  background-color: var(--surface-raised);
+  font-size: var(--text-sm);
+}
+
+.rule[data-ok] {
+  border-inline-start-color: var(--accent);
+}
+
+.rule strong {
+  font-weight: 700;
+}
+
+.ruleSub {
+  color: var(--ink-muted);
+}
+
 .item {
   display: grid;
   grid-template-columns: clamp(4.5rem, 12vw, 7.5rem) minmax(0, 1fr);

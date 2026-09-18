@@ -16,9 +16,10 @@ import {
   startingPrice,
   type Product,
 } from '@/data/catalog'
-import { ATACADO_MIN, whatsappUrl } from '@/data/site'
-import { formatBRL } from '@/lib/format'
+import { ATACADO_MIN, PEDIDO_MINIMO, whatsappUrl } from '@/data/site'
+import { formatBRL, formatPrice } from '@/lib/format'
 import { addQuoteItem, itemTotal } from '@/lib/quote-store'
+import { CnpjShortcut } from '@/components/quote/CnpjShortcut'
 import styles from './ProductView.module.css'
 
 const COLOR_SUGGESTIONS = ['Preto', 'Branco', 'Marinho', 'Royal', 'Cinza', 'Vinho', 'Verde', 'Bege'] as const
@@ -125,17 +126,26 @@ export function ProductView({ product }: { product: Product }) {
           </nav>
           <h1 className={styles.name}>{product.name}</h1>
           <p className={styles.summary}>{product.summary}</p>
-          <p className={styles.from}>
-            <span>a partir de</span>
-            <strong className="u-tnum">{formatBRL(startingPrice(product))}</strong>
-            <span>/ peça no atacado</span>
-          </p>
+          {startingPrice(product) !== null ? (
+            <p className={styles.from}>
+              <span>a partir de</span>
+              <strong className="u-tnum">{formatPrice(startingPrice(product))}</strong>
+              <span>/ peça no atacado</span>
+            </p>
+          ) : (
+            <p className={styles.from}>
+              <strong>Sob consulta</strong>
+              <span>o valor vem no orçamento</span>
+            </p>
+          )}
           <ul className={styles.highlights}>
             {product.highlights.map((h) => (
               <li key={h}>{h}</li>
             ))}
           </ul>
         </header>
+
+        <CnpjShortcut variant="product" currentSlug={product.slug} />
 
         <form
           className={styles.form}
@@ -165,7 +175,13 @@ export function ProductView({ product }: { product: Product }) {
                     <span className={styles.fabricName}>{f.label}</span>
                     <span className={styles.fabricNote}>{f.note}</span>
                     <span className={styles.fabricPrice}>
-                      a partir de <strong className="u-tnum">{formatBRL(p.atacado)}</strong>
+                      {p ? (
+                        <>
+                          a partir de <strong className="u-tnum">{formatBRL(p.atacado)}</strong>
+                        </>
+                      ) : (
+                        'Sob consulta'
+                      )}
                     </span>
                   </label>
                 )
@@ -228,6 +244,11 @@ export function ProductView({ product }: { product: Product }) {
                   <span className={styles.unitNote}>por peça, com personalização simples</span>
                 </p>
               ) : null}
+              <p className={styles.minimo}>
+                {total > 0 && total < PEDIDO_MINIMO.porProduto
+                  ? `Faltam ${PEDIDO_MINIMO.porProduto - total} peças para o mínimo deste modelo (${PEDIDO_MINIMO.porProduto}).`
+                  : `Pedido mínimo: ${PEDIDO_MINIMO.total} peças no total, podendo combinar ${PEDIDO_MINIMO.produtos} modelos com pelo menos ${PEDIDO_MINIMO.porProduto} iguais de cada.`}
+              </p>
             </div>
           </fieldset>
 

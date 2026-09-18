@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Hero } from '@/components/sections/Hero'
 import { Manifesto } from '@/components/sections/Manifesto'
 import { Categorias } from '@/components/sections/Categorias'
+import { ParaEmpresas } from '@/components/sections/ParaEmpresas'
 import { Processo } from '@/components/sections/Processo'
 import { Tecnicas } from '@/components/sections/Tecnicas'
 import { Segmentos } from '@/components/sections/Segmentos'
@@ -13,7 +14,8 @@ import { FAQ } from '@/data/faq'
 import { SITE } from '@/data/site'
 
 export const metadata: Metadata = {
-  title: { absolute: `${SITE.name} — Uniformes premium em Brasília desde 2016` },
+  title: { absolute: `Confecção de uniformes para empresas em Brasília | ${SITE.name}` },
+  description: SITE.description,
   alternates: { canonical: '/' },
 }
 
@@ -51,6 +53,7 @@ export default function HomePage() {
       <Hero />
       <Manifesto />
       <Categorias />
+      <ParaEmpresas />
       <Processo />
       <Tecnicas />
       <Segmentos />

@@ -22,6 +22,7 @@ type Sort = 'relevancia' | 'menor' | 'maior'
 type Props = {
   initialCategory: CategorySlug | null
   initialSegment: SegmentSlug | null
+  initialQuery?: string
 }
 
 function normalize(text: string) {
@@ -53,18 +54,21 @@ function matches(product: Product, category: CategorySlug | null, segment: Segme
  * Os filtros vivem na URL (replaceState): um link para "polos para
  * gastronomia" é compartilhável, e voltar da página do produto mantém a busca.
  */
-export function CatalogExplorer({ initialCategory, initialSegment }: Props) {
+export function CatalogExplorer({ initialCategory, initialSegment, initialQuery = '' }: Props) {
   const [category, setCategory] = useState<CategorySlug | null>(initialCategory)
   const [segment, setSegment] = useState<SegmentSlug | null>(initialSegment)
-  const [query, setQuery] = useState('')
+  const [query, setQuery] = useState(initialQuery)
   const [sort, setSort] = useState<Sort>('relevancia')
   const grid = useRef<HTMLUListElement | null>(null)
   const flipState = useRef<ReturnType<typeof Flip.getState> | null>(null)
 
   const ordered = useMemo(() => {
     if (sort === 'relevancia') return PRODUCTS
-    const list = [...PRODUCTS].sort((a, b) => startingPrice(a) - startingPrice(b))
-    return sort === 'menor' ? list : list.reverse()
+    // Sob consulta vai sempre para o fim, nos dois sentidos.
+    const priced = PRODUCTS.filter((p) => startingPrice(p) !== null)
+    const rest = PRODUCTS.filter((p) => startingPrice(p) === null)
+    const list = [...priced].sort((a, b) => (startingPrice(a) ?? 0) - (startingPrice(b) ?? 0))
+    return [...(sort === 'menor' ? list : list.reverse()), ...rest]
   }, [sort])
 
   const visible = useMemo(

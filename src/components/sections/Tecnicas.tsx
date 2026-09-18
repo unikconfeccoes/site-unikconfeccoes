@@ -6,6 +6,8 @@ import { Media } from '@/components/primitives/Media'
 import { Display, Eyebrow, Label, Serif } from '@/components/primitives/Typography'
 import { TECHNIQUES } from '@/data/catalog'
 import { useGsapOn } from '@/hooks/useGsap'
+import Link from 'next/link'
+import { ROUTES } from '@/data/seo/routes'
 import styles from './Tecnicas.module.css'
 
 const STACK = '(min-width: 768px) and (prefers-reduced-motion: no-preference)'
@@ -79,6 +81,9 @@ export function Tecnicas() {
                     </Label>
                     <span>{t.ideal}</span>
                   </div>
+                  <Link href={ROUTES.tecnica(t.slug)} className={styles.more}>
+                    Entenda como funciona {t.name.toLowerCase() === 'dtf' ? 'o DTF' : `a ${t.name.toLowerCase()}`} →
+                  </Link>
                 </div>
                 <div className={styles.media}>
                   <Media

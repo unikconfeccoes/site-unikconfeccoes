@@ -1,6 +1,7 @@
 import type { QuoteItem } from '@/lib/quote-store'
 import { quoteTotal } from '@/lib/quote-store'
 import type { QuoteContact } from '@/lib/whatsapp'
+import type { Company } from '@/lib/cnpj'
 
 /**
  * Cópia de cada envio no Supabase (tabelas `orcamentos` e `lab_briefings`).
@@ -27,11 +28,16 @@ function insert(table: string, row: Record<string, unknown>) {
 
 const orNull = (s: string) => s.trim() || null
 
-export function saveQuote(code: string, items: readonly QuoteItem[], c: QuoteContact) {
+export function saveQuote(code: string, items: readonly QuoteItem[], c: QuoteContact, company?: Company | null) {
+  const cnpj = c.cnpj.replace(/\D/g, '')
   insert('orcamentos', {
     codigo: code,
     nome: c.nome.trim(),
     empresa: orNull(c.empresa),
+    cnpj: cnpj.length === 14 ? cnpj : null,
+    equipe: orNull(c.equipe),
+    // Snapshot da Receita só quando o CNPJ do formulário é o da empresa consultada.
+    dados_empresa: company && company.cnpj === cnpj ? company : null,
     whatsapp: c.whatsapp,
     email: orNull(c.email),
     cidade: orNull(c.cidade),

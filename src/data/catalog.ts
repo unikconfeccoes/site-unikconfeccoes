@@ -26,6 +26,8 @@ export type GarmentKind =
   | 'apron'
   | 'dolma'
   | 'coat'
+  | 'shorts'
+  | 'jacket'
 
 export type CategorySlug =
   | 'polos'
@@ -34,6 +36,7 @@ export type CategorySlug =
   | 'sociais'
   | 'moletons'
   | 'calcas'
+  | 'shorts'
   | 'gastronomia'
   | 'jalecos'
 
@@ -53,7 +56,11 @@ export type Fabric = {
   id: string
   label: string
   note: string
-  price: PriceKey
+  /**
+   * Linha da planilha de precificação. Tecidos sem linha na planilha ficam
+   * sem preço e aparecem como "sob consulta": o site nunca inventa valor.
+   */
+  price?: PriceKey
 }
 
 export type Product = {
@@ -89,10 +96,11 @@ export const CATEGORIES: readonly Category[] = [
   { slug: 'camisetas', name: 'Camisetas', garment: 'tee', description: 'Da básica de evento à algodão pima, com modelagem regular ou oversized.' },
   { slug: 'esportivo', name: 'Dry & Esportivo', garment: 'tee-long', description: 'Malhas técnicas que respiram, secam rápido e protegem do sol.' },
   { slug: 'sociais', name: 'Camisas Sociais', garment: 'shirt', description: 'Tricoline, fustão e linho para quem atende de perto.' },
-  { slug: 'moletons', name: 'Moletons', garment: 'hoodie', description: 'Capuz, bolso canguru e a peça que turma de formatura veste até gastar.' },
-  { slug: 'calcas', name: 'Calças', garment: 'pants', description: 'Tactel para o dia a dia e pied de poule para a cozinha.' },
+  { slug: 'moletons', name: 'Casacos & Moletons', garment: 'jacket', description: 'Moletom com capuz, corta-vento, tactel, poliamida e casaco esportivo para equipes e turmas.' },
+  { slug: 'calcas', name: 'Calças', garment: 'pants', description: 'Moletom, esportiva, tactel, brim, jeans e a calça pied de poule da cozinha.' },
+  { slug: 'shorts', name: 'Shorts', garment: 'shorts', description: 'Shorts de futebol, futevôlei, moletom e linho para esporte, lazer e hotelaria.' },
   { slug: 'gastronomia', name: 'Gastronomia', garment: 'dolma', description: 'Dólmãs e aventais para cozinha e salão, feitos para aguentar o serviço.' },
-  { slug: 'jalecos', name: 'Jalecos', garment: 'coat', description: 'Brim leve com caimento limpo para saúde, estética e serviços.' },
+  { slug: 'jalecos', name: 'Jalecos', garment: 'coat', description: 'Jalecos em brim, gabardine e oxford para saúde, estética e serviços.' },
 ]
 
 export const CATEGORY_BY_SLUG = Object.fromEntries(CATEGORIES.map((c) => [c.slug, c])) as Record<
@@ -114,6 +122,7 @@ export const PRODUCTS: readonly Product[] = [
       { id: 'pv', label: 'PV', note: 'Poliéster e viscose · leve e fácil de lavar', price: 'Polo PV' },
       { id: 'algodao', label: 'Algodão', note: '100% algodão · toque natural', price: 'Polo em algodão' },
       { id: 'suedine', label: 'Suedine', note: 'Toque aveludado · acabamento premium', price: 'Polo em suedine' },
+      { id: 'algodao-elastano', label: 'Algodão com elastano', note: 'Algodão com elasticidade · veste junto ao corpo' },
     ],
     segments: ['corporativo', 'varejo', 'eventos', 'educacao'],
     techniques: TEXTIL,
@@ -128,7 +137,7 @@ export const PRODUCTS: readonly Product[] = [
     summary: 'A trama em colmeia do piquet dá estrutura à gola e presença ao uniforme.',
     fabrics: [
       { id: 'piquet-pv', label: 'Piquet PV', note: 'Poliéster e viscose · o piquet mais versátil', price: 'Polo Piquet PV' },
-      { id: 'piquet-pa', label: 'Piquet PA', note: 'Poliéster e algodão · mais encorpado', price: 'Polo Piquet PA' },
+      { id: 'piquet-pa', label: 'Piquet PA', note: 'Algodão com poliéster · mais encorpado', price: 'Polo Piquet PA' },
       { id: 'piquet-conforto', label: 'Piquet Conforto', note: 'A linha nobre · toque macio e caimento de alfaiataria', price: 'Polo Piquet Conforto' },
     ],
     segments: ['corporativo', 'varejo', 'hotelaria', 'saude', 'eventos'],
@@ -158,8 +167,8 @@ export const PRODUCTS: readonly Product[] = [
     summary: 'A camiseta que vira uniforme de equipe, de evento ou de formatura, disponível em cinco malhas.',
     fabrics: [
       { id: 'pp', label: 'PP', note: 'Poliéster · a mais econômica', price: 'Camiseta PP' },
-      { id: 'pv', label: 'PV', note: 'Poliéster e viscose · leve', price: 'Camiseta PV' },
-      { id: 'algodao', label: 'Algodão', note: '100% algodão penteado', price: 'Camiseta Algodão' },
+      { id: 'pv', label: 'PV (poliviscose)', note: 'Poliéster e viscose · leve', price: 'Camiseta PV' },
+      { id: 'algodao', label: 'Algodão fio 30.1', note: '100% algodão penteado · o fio clássico de camiseta', price: 'Camiseta Algodão' },
       { id: 'algodao-elastano', label: 'Algodão com elastano', note: 'Algodão com elasticidade · veste junto ao corpo', price: 'Camiseta Algodão com elastano' },
       { id: 'suedine', label: 'Suedine', note: 'Toque aveludado · acabamento premium', price: 'Camiseta Suedine' },
     ],
@@ -170,15 +179,20 @@ export const PRODUCTS: readonly Product[] = [
   },
   {
     slug: 'camiseta-pima',
-    name: 'Camiseta Pima',
+    name: 'Camiseta Algodão Premium',
     category: 'camisetas',
     garment: 'tee',
-    summary: 'Algodão pima de fibra extralonga: a malha mais nobre da linha, para marcas que querem ser tocadas.',
-    fabrics: [{ id: 'pima', label: 'Algodão Pima', note: 'Fibra extralonga · brilho natural e toque sedoso', price: 'Camiseta Algodão Pima' }],
+    summary: 'Algodões nobres de fibra longa (pima, egípcio e peruano): a camiseta mais macia da linha, para marcas que querem ser tocadas.',
+    fabrics: [
+      { id: 'pima', label: 'Algodão Pima', note: 'Fibra extralonga · brilho natural e toque sedoso', price: 'Camiseta Algodão Pima' },
+      { id: 'egipcio', label: 'Algodão Egípcio', note: 'Fibra longa · toque macio e resistente' },
+      { id: 'peruano', label: 'Algodão Peruano', note: 'Fibra longa · malha fina e sedosa' },
+      { id: 'algodao-premium', label: 'Algodão Premium', note: 'Malha premium encorpada · caimento firme' },
+    ],
     segments: ['corporativo', 'varejo', 'eventos'],
-    techniques: TEXTIL,
+    techniques: [...TEXTIL, 'alto-relevo'],
     sizes: SIZES_ADULT,
-    highlights: ['Ribana pima', 'Toque sedoso', 'Não forma bolinhas'],
+    highlights: ['Quatro algodões nobres', 'Toque sedoso', 'Ideal para marca e brinde corporativo'],
   },
   {
     slug: 'camiseta-oversized',
@@ -191,7 +205,7 @@ export const PRODUCTS: readonly Product[] = [
       { id: 'suedine', label: 'Suedine', note: 'Toque aveludado', price: 'Camiseta Oversized Suedine' },
     ],
     segments: ['eventos', 'educacao'],
-    techniques: TEXTIL,
+    techniques: [...TEXTIL, 'alto-relevo'],
     sizes: SIZES_ADULT,
     highlights: ['Ombro caído', 'Malha encorpada', 'Estampa grande nas costas'],
   },
@@ -220,11 +234,13 @@ export const PRODUCTS: readonly Product[] = [
       { id: 'dry-elastano', label: 'Dry com elastano', note: 'Veste junto e acompanha o movimento', price: 'Camiseta de dry elastano' },
       { id: 'dry-texturizado', label: 'Dry texturizado', note: 'Trama com relevo · visual esportivo', price: 'Camiseta de dry texturizado' },
       { id: 'dry-poliamida', label: 'Dry poliamida', note: 'Toque gelado · alta performance', price: 'Camiseta de dry de poliamida' },
+      { id: 'dry-respiravel', label: 'Dry com elastano respirável', note: 'Trama que ventila · para calor intenso' },
+      { id: 'dry-poliamida-elastano', label: 'Dry poliamida com elastano', note: 'Toque gelado e elasticidade' },
     ],
     segments: ['esporte', 'eventos'],
     techniques: TEXTIL_SUB,
     sizes: SIZES_ADULT,
-    highlights: ['Secagem rápida', 'Sublimação total', 'Quatro malhas técnicas'],
+    highlights: ['Secagem rápida', 'Sublimação total', 'Seis malhas técnicas'],
   },
   {
     slug: 'camiseta-dry-manga-longa',
@@ -278,6 +294,8 @@ export const PRODUCTS: readonly Product[] = [
     summary: 'Camisa de botão para recepção, salão e atendimento, com o logo bordado no peito.',
     fabrics: [
       { id: 'tricoline', label: 'Tricoline com elastano', note: 'Amassa pouco · veste bem o dia inteiro', price: 'Camisa Social Tricoline' },
+      { id: 'tricoline-pura', label: 'Tricoline', note: 'O tecido clássico da camisa social' },
+      { id: 'algodao-social', label: 'Algodão', note: 'Toque natural · fresca' },
       { id: 'fustao', label: 'Fustão Prime', note: 'Textura em relevo · aparência nobre', price: 'Camisa Social Fausto' },
     ],
     segments: ['corporativo', 'hotelaria', 'gastronomia', 'saude'],
@@ -313,7 +331,7 @@ export const PRODUCTS: readonly Product[] = [
       { id: 'cores-especiais', label: 'Cores especiais', note: 'Moletom flanelado · paleta ampliada', price: 'Moletom com capuz - cores especiais' },
     ],
     segments: ['educacao', 'eventos', 'corporativo'],
-    techniques: TEXTIL,
+    techniques: [...TEXTIL, 'alto-relevo'],
     sizes: SIZES_ADULT,
     highlights: ['Capuz e bolso canguru', 'Estampa frente e costas', 'Punho e barra em ribana'],
   },
@@ -345,6 +363,156 @@ export const PRODUCTS: readonly Product[] = [
     techniques: ['bordado'],
     sizes: SIZES_ADULT,
     highlights: ['Cós com elástico e cordão', 'Padrão pied de poule', 'Resiste à lavagem industrial'],
+  },
+
+  /* -------------------------------------------- calças (sem preço na planilha) */
+  {
+    slug: 'calca-moletom',
+    name: 'Calça de Moletom',
+    category: 'calcas',
+    garment: 'pants',
+    summary: 'Calça de moletom com cós de elástico e punho: conforto para turma, equipe e kit de moletom completo.',
+    fabrics: [{ id: 'moletom-calca', label: 'Moletom flanelado', note: 'Macio por dentro · quente' }],
+    segments: ['educacao', 'esporte', 'eventos'],
+    techniques: TEXTIL,
+    sizes: SIZES_ADULT,
+    highlights: ['Combina com o moletom da turma', 'Cós com elástico e cordão', 'Estampa na perna'],
+  },
+  {
+    slug: 'calca-esportiva',
+    name: 'Calça Esportiva',
+    category: 'calcas',
+    garment: 'pants',
+    summary: 'Calça leve de treino para equipes esportivas, academias e comissões técnicas.',
+    fabrics: [{ id: 'esportiva', label: 'Malha esportiva', note: 'Leve · acompanha o movimento' }],
+    segments: ['esporte', 'educacao'],
+    techniques: TEXTIL_SUB,
+    sizes: SIZES_ADULT,
+    highlights: ['Leve e elástica', 'Cós com elástico', 'Faixa lateral personalizável'],
+  },
+  {
+    slug: 'calca-brim',
+    name: 'Calça de Brim',
+    category: 'calcas',
+    garment: 'pants',
+    summary: 'A calça de trabalho que aguenta rotina pesada: brim resistente para manutenção, logística e campo.',
+    fabrics: [{ id: 'brim-calca', label: 'Brim', note: 'Tecido plano resistente · durável' }],
+    segments: ['corporativo', 'saude'],
+    techniques: ['bordado', 'dtf'],
+    sizes: SIZES_ADULT,
+    highlights: ['Brim resistente', 'Bolsos funcionais', 'Lavagem frequente'],
+  },
+  {
+    slug: 'calca-jeans',
+    name: 'Calça Jeans',
+    category: 'calcas',
+    garment: 'pants',
+    summary: 'Jeans para uniforme de loja, bar e equipe de campo, com a marca bordada no bolso.',
+    fabrics: [{ id: 'jeans-calca', label: 'Jeans', note: 'Algodão resistente · visual casual' }],
+    segments: ['varejo', 'gastronomia', 'corporativo'],
+    techniques: ['bordado'],
+    sizes: SIZES_ADULT,
+    highlights: ['Visual casual', 'Bordado no bolso', 'Combina com polo e camiseta'],
+  },
+
+  /* ------------------------------------------------ shorts (sem preço) */
+  {
+    slug: 'short-futebol',
+    name: 'Short de Futebol',
+    category: 'shorts',
+    garment: 'shorts',
+    summary: 'Short de jogo em malha dry, leve e com sublimação total para times, escolinhas e torneios corporativos.',
+    fabrics: [{ id: 'dry-short', label: 'Dry', note: 'Leve · secagem rápida' }],
+    segments: ['esporte', 'eventos', 'educacao'],
+    techniques: ['sublimacao', 'dtf', 'serigrafia'],
+    sizes: SIZES_ADULT,
+    highlights: ['Sublimação total', 'Cós com elástico', 'Numeração personalizada'],
+  },
+  {
+    slug: 'short-futevolei',
+    name: 'Short de Futevôlei',
+    category: 'shorts',
+    garment: 'shorts',
+    summary: 'Short de praia e areia para futevôlei e beach tennis, leve e de secagem rápida.',
+    fabrics: [{ id: 'short-praia', label: 'Tecido de praia', note: 'Leve · seca rápido' }],
+    segments: ['esporte', 'eventos'],
+    techniques: ['sublimacao', 'dtf', 'serigrafia'],
+    sizes: SIZES_ADULT,
+    highlights: ['Secagem rápida', 'Estampa total', 'Para areia e praia'],
+  },
+  {
+    slug: 'short-moletom',
+    name: 'Short de Moletom',
+    category: 'shorts',
+    garment: 'shorts',
+    summary: 'Short de moletom confortável para kit de turma, lazer e ações de marca.',
+    fabrics: [{ id: 'moletom-short', label: 'Moletom', note: 'Macio · confortável' }],
+    segments: ['educacao', 'eventos'],
+    techniques: TEXTIL,
+    sizes: SIZES_ADULT,
+    highlights: ['Cós com cordão', 'Estampa na perna', 'Kit com moletom'],
+  },
+  {
+    slug: 'short-linho',
+    name: 'Short de Linho',
+    category: 'shorts',
+    garment: 'shorts',
+    summary: 'Short de linho para equipes de hotel, resort, beach club e eventos ao ar livre.',
+    fabrics: [{ id: 'linho-short', label: 'Linho', note: 'Fresco · elegante' }],
+    segments: ['hotelaria', 'eventos'],
+    techniques: ['bordado'],
+    sizes: SIZES_ADULT,
+    highlights: ['Tecido natural', 'Visual elegante', 'Bordado discreto'],
+  },
+
+  /* ----------------------------------------------- casacos (sem preço) */
+  {
+    slug: 'jaqueta-corta-vento',
+    name: 'Jaqueta Corta-vento',
+    category: 'moletons',
+    garment: 'jacket',
+    summary: 'Corta-vento leve com zíper, para equipes externas, eventos ao ar livre e comissões esportivas.',
+    fabrics: [{ id: 'corta-vento', label: 'Corta-vento', note: 'Leve · protege do vento' }],
+    segments: ['corporativo', 'esporte', 'eventos'],
+    techniques: ['bordado', 'dtf', 'serigrafia'],
+    sizes: SIZES_ADULT,
+    highlights: ['Zíper frontal', 'Leve e dobrável', 'Logo bordado no peito'],
+  },
+  {
+    slug: 'jaqueta-tactel',
+    name: 'Jaqueta de Tactel',
+    category: 'moletons',
+    garment: 'jacket',
+    summary: 'Jaqueta de tactel para uniforme de equipe e turma, combinando com a calça de tactel.',
+    fabrics: [{ id: 'tactel-jaqueta', label: 'Tactel', note: 'Leve · resistente' }],
+    segments: ['educacao', 'esporte', 'corporativo'],
+    techniques: ['bordado', 'dtf', 'serigrafia'],
+    sizes: SIZES_ADULT,
+    highlights: ['Conjunto com a calça', 'Zíper frontal', 'Leve'],
+  },
+  {
+    slug: 'jaqueta-poliamida',
+    name: 'Jaqueta de Poliamida',
+    category: 'moletons',
+    garment: 'jacket',
+    summary: 'Jaqueta em poliamida com acabamento premium, para diretoria, equipes comerciais e eventos corporativos.',
+    fabrics: [{ id: 'poliamida-jaqueta', label: 'Poliamida', note: 'Toque macio · acabamento premium' }],
+    segments: ['corporativo', 'eventos'],
+    techniques: ['bordado', 'dtf'],
+    sizes: SIZES_ADULT,
+    highlights: ['Acabamento premium', 'Leve', 'Bordado no peito'],
+  },
+  {
+    slug: 'jaqueta-esportiva',
+    name: 'Casaco Esportivo',
+    category: 'moletons',
+    garment: 'jacket',
+    summary: 'Casaco de treino para times, academias e escolinhas, com a identidade do clube.',
+    fabrics: [{ id: 'esportiva-casaco', label: 'Malha esportiva', note: 'Leve · acompanha o movimento' }],
+    segments: ['esporte', 'educacao'],
+    techniques: ['bordado', 'dtf', 'serigrafia', 'sublimacao'],
+    sizes: SIZES_ADULT,
+    highlights: ['Conjunto com calça esportiva', 'Zíper frontal', 'Identidade do clube'],
   },
 
   /* ---------------------------------------------------- gastronomia */
@@ -406,15 +574,19 @@ export const PRODUCTS: readonly Product[] = [
   /* -------------------------------------------------------- jalecos */
   {
     slug: 'jaleco-brim',
-    name: 'Jaleco Brim',
+    name: 'Jaleco Profissional',
     category: 'jalecos',
     garment: 'coat',
-    summary: 'Jaleco em brim leve, com caimento limpo e o nome bordado no peito.',
-    fabrics: [{ id: 'brim-leve', label: 'Brim leve', note: 'Resistente · fácil de passar', price: 'Jaleco de Brim leve' }],
+    summary: 'Jaleco em brim, gabardine ou oxford, com caimento limpo e o nome bordado no peito.',
+    fabrics: [
+      { id: 'brim-leve', label: 'Brim leve', note: 'Resistente · fácil de passar', price: 'Jaleco de Brim leve' },
+      { id: 'gabardine-jaleco', label: 'Gabardine', note: 'Caimento fluido · aparência social' },
+      { id: 'oxford', label: 'Oxford', note: 'Leve e econômico · seca rápido' },
+    ],
     segments: ['saude', 'corporativo'],
     techniques: ['bordado', 'dtf'],
     sizes: SIZES_ADULT,
-    highlights: ['Nome bordado', 'Bolsos funcionais', 'Brim resistente'],
+    highlights: ['Nome bordado', 'Bolsos funcionais', 'Três tecidos'],
   },
 ]
 
@@ -424,17 +596,20 @@ export const PRODUCT_BY_SLUG: Record<string, Product> = Object.fromEntries(PRODU
 
 export type FabricPrice = { varejo: number; atacado: number }
 
-export function fabricPrice(fabric: Fabric): FabricPrice {
-  return PRICE_TABLE[fabric.price]
+export function fabricPrice(fabric: Fabric): FabricPrice | null {
+  return fabric.price ? PRICE_TABLE[fabric.price] : null
 }
 
-/** Menor preço de atacado do modelo — é o número do "a partir de". */
-export function startingPrice(product: Product): number {
-  return Math.min(...product.fabrics.map((f) => fabricPrice(f).atacado))
+/** Menor preço de atacado do modelo (o "a partir de"), ou null se sob consulta. */
+export function startingPrice(product: Product): number | null {
+  const prices = product.fabrics.map(fabricPrice).filter((p) => p !== null)
+  return prices.length ? Math.min(...prices.map((p) => p.atacado)) : null
 }
 
 export function categoryStartingPrice(slug: CategorySlug): number | null {
-  const prices = PRODUCTS.filter((p) => p.category === slug).map(startingPrice)
+  const prices = PRODUCTS.filter((p) => p.category === slug)
+    .map(startingPrice)
+    .filter((p) => p !== null)
   return prices.length ? Math.min(...prices) : null
 }
 

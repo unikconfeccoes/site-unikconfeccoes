@@ -7,19 +7,25 @@ import { Cta } from '@/components/primitives/Cta'
 import { Label } from '@/components/primitives/Typography'
 import { SizeGrid } from '@/components/catalog/SizeGrid'
 import { PRODUCT_BY_SLUG } from '@/data/catalog'
-import { ATACADO_MIN, WHATSAPP, whatsappUrl } from '@/data/site'
+import { ATACADO_MIN, COMMERCIAL, PEDIDO_MINIMO, WHATSAPP, whatsappUrl } from '@/data/site'
 import { clearQuote, itemTotal, quoteTotal, removeQuoteItem, updateQuoteItem, useQuote } from '@/lib/quote-store'
 import { quoteCode, quoteMessage, type QuoteContact } from '@/lib/whatsapp'
 import { saveQuote } from '@/lib/leads'
+import { companyName, maskCnpj, type Company } from '@/lib/cnpj'
+import { useCompany } from '@/lib/company-store'
+import { CnpjShortcut } from './CnpjShortcut'
 import styles from './QuoteView.module.css'
 
-const EMPTY_CONTACT: QuoteContact = { nome: '', empresa: '', whatsapp: '', email: '', cidade: '', prazo: '', observacoes: '' }
+const EMPTY_CONTACT: QuoteContact = { nome: '', empresa: '', cnpj: '', equipe: '', whatsapp: '', email: '', cidade: '', prazo: '', observacoes: '' }
+
+const TEAM_SIZES = ['Até 20 pessoas', '21 a 50', '51 a 200', '201 a 500', 'Mais de 500'] as const
 
 type Errors = Partial<Record<keyof QuoteContact, string>>
 
 function validate(c: QuoteContact): Errors {
   const errors: Errors = {}
   if (c.nome.trim().length < 2) errors.nome = 'Informe seu nome.'
+  if (c.empresa.trim().length < 2) errors.empresa = 'Informe o nome da empresa, escola ou evento.'
   if (c.whatsapp.replace(/\D/g, '').length < 10) errors.whatsapp = 'Informe um WhatsApp com DDD.'
   if (c.email && !/^\S+@\S+\.\S+$/.test(c.email)) errors.email = 'E-mail inválido.'
   return errors
@@ -32,6 +38,24 @@ function maskPhone(raw: string): string {
   if (d.length <= 6) return `(${d.slice(0, 2)}) ${d.slice(2)}`
   if (d.length <= 10) return `(${d.slice(0, 2)}) ${d.slice(2, 6)}-${d.slice(6)}`
   return `(${d.slice(0, 2)}) ${d.slice(2, 7)}-${d.slice(7)}`
+}
+
+/**
+ * Dados da Receita → contato. Empresa, CNPJ e cidade vêm da empresa; e-mail e
+ * WhatsApp só entram se o cliente ainda não digitou (o telefone da Receita
+ * costuma ser fixo, então só vira WhatsApp quando é celular).
+ */
+function fillFromCompany(c: QuoteContact, co: Company): QuoteContact {
+  const tel = co.telefone
+  const isMobile = tel.length === 11 && tel[2] === '9'
+  return {
+    ...c,
+    empresa: companyName(co),
+    cnpj: maskCnpj(co.cnpj),
+    cidade: co.municipio ? `${co.municipio}/${co.uf}` : c.cidade,
+    email: c.email || co.email,
+    whatsapp: c.whatsapp || (isMobile ? maskPhone(tel) : ''),
+  }
 }
 
 /**
@@ -50,7 +74,28 @@ export function QuoteView() {
   const [sent, setSent] = useState<{ code: string; url: string } | null>(null)
   const [editing, setEditing] = useState<string | null>(null)
 
+  // A empresa pode chegar do atalho desta página ou já salva de outra (produto,
+  // catálogo). Ajuste durante o render: preenche uma vez por CNPJ.
+  const company = useCompany()
+  const [filledFor, setFilledFor] = useState<string | null>(null)
+  if (company && company.cnpj !== filledFor) {
+    setFilledFor(company.cnpj)
+    setContact((c) => fillFromCompany(c, company))
+    setErrors((er) => ({ ...er, empresa: undefined }))
+  }
+
   const total = quoteTotal(items)
+
+  // Regra do pedido mínimo: 20 peças no total e pelo menos 10 iguais de cada
+  // modelo. Avisa, mas não bloqueia: casos fora da regra se resolvem na conversa.
+  const perModel = new Map<string, { name: string; n: number }>()
+  for (const it of items) {
+    const cur = perModel.get(it.productSlug) ?? { name: it.productName, n: 0 }
+    perModel.set(it.productSlug, { name: cur.name, n: cur.n + itemTotal(it) })
+  }
+  const shortModels = [...perModel.values()].filter((m) => m.n < PEDIDO_MINIMO.porProduto)
+  const belowTotal = total < PEDIDO_MINIMO.total
+  const minimoOk = !belowTotal && shortModels.length === 0
 
   const field = (key: keyof QuoteContact) => ({
     value: contact[key],
@@ -72,8 +117,8 @@ export function QuoteView() {
       return
     }
     const code = quoteCode()
-    const url = whatsappUrl(quoteMessage(code, items, contact))
-    saveQuote(code, items, contact)
+    const url = whatsappUrl(quoteMessage(code, items, contact, company))
+    saveQuote(code, items, contact, company)
     setSent({ code, url })
     window.open(url, '_blank', 'noopener,noreferrer')
   }
@@ -146,6 +191,18 @@ export function QuoteView() {
           <Link href="/catalogo" className={styles.addMore}>
             + Adicionar outro modelo
           </Link>
+        </div>
+
+        <div className={styles.rule} data-ok={minimoOk || undefined} role="status">
+          <strong>{minimoOk ? 'Pedido dentro do mínimo' : 'Atenção ao pedido mínimo'}</strong>
+          <span>
+            {minimoOk
+              ? COMMERCIAL.minimo
+              : belowTotal
+                ? `Faltam ${PEDIDO_MINIMO.total - total} peças para o mínimo de ${PEDIDO_MINIMO.total}. ${COMMERCIAL.minimo}`
+                : `Cada modelo precisa de pelo menos ${PEDIDO_MINIMO.porProduto} peças iguais: ${shortModels.map((m) => `${m.name} (${m.n})`).join(', ')}.`}
+          </span>
+          <span className={styles.ruleSub}>Pagamento: {COMMERCIAL.pagamento}</span>
         </div>
 
         <ol className={styles.list}>
@@ -247,12 +304,29 @@ export function QuoteView() {
         <h2 className={styles.sideTitle}>Seus dados</h2>
         <p className={styles.sideText}>Para a UNIK responder com valores e prazo.</p>
 
+        <CnpjShortcut variant="quote" onType={(cnpj) => setContact((c) => ({ ...c, cnpj }))} />
+
         <div className={styles.fields}>
           <Field id="nome" label="Nome*" error={errors.nome}>
             <input id="campo-nome" type="text" autoComplete="name" className={styles.input} {...field('nome')} />
           </Field>
-          <Field id="empresa" label="Empresa ou evento">
+          <Field id="empresa" label="Empresa*" error={errors.empresa}>
             <input id="campo-empresa" type="text" autoComplete="organization" className={styles.input} {...field('empresa')} />
+          </Field>
+          <Field id="equipe" label="Tamanho da equipe">
+            <select
+              id="campo-equipe"
+              className={styles.input}
+              value={contact.equipe}
+              onChange={(e) => setContact((c) => ({ ...c, equipe: e.target.value }))}
+            >
+              <option value="">Selecione</option>
+              {TEAM_SIZES.map((t) => (
+                <option key={t} value={t}>
+                  {t}
+                </option>
+              ))}
+            </select>
           </Field>
           <Field id="whatsapp" label="WhatsApp*" error={errors.whatsapp}>
             <input id="campo-whatsapp" type="tel" inputMode="tel" autoComplete="tel-national" placeholder="(61) 99999-9999" className={styles.input} {...field('whatsapp')} />

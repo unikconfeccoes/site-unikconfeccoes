@@ -347,6 +347,13 @@
   color: var(--ouro);
 }
 
+.minimo {
+  padding-block-start: 0.6rem;
+  border-block-start: 1px solid color-mix(in oklab, var(--osso) 14%, transparent);
+  font-size: var(--text-sm);
+  color: color-mix(in oklab, var(--osso) 80%, var(--preto));
+}
+
 .unitNote {
   flex-basis: 100%;
   text-transform: none;

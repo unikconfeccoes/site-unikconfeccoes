@@ -10,7 +10,7 @@ import { CATEGORIES, CATEGORY_BY_SLUG, SEGMENT_BY_SLUG, TECHNIQUE_BY_SLUG } from
 import { ATACADO_MIN } from '@/data/site'
 import { CATEGORY_URL, ROUTES } from '@/data/seo/routes'
 import { CATEGORY_SEO, categoryFacts, categoryFaq, categoryFromUrl } from '@/lib/catalog-seo'
-import { formatBRL } from '@/lib/format'
+import { formatPrice } from '@/lib/format'
 import { itemListJsonLd, pageMeta } from '@/lib/seo'
 
 export function generateStaticParams() {
@@ -19,14 +19,14 @@ export function generateStaticParams() {
 
 export const dynamicParams = false
 
-export async function generateMetadata({ params }: PageProps<'/catalogo/linha/[linha]'>) {
+export async function generateMetadata({ params }: { params: Promise<{ linha: string }> }) {
   const { linha } = await params
   const slug = categoryFromUrl(linha)
   if (!slug) return {}
   const f = categoryFacts(slug)
   return pageMeta({
     title: `${CATEGORY_SEO[slug].seoTitle} em Brasília`,
-    description: `${CATEGORY_BY_SLUG[slug].description} ${f.products.length} modelos, a partir de ${formatBRL(f.min)} por peça no atacado. Orçamento online para empresas.`,
+    description: `${CATEGORY_BY_SLUG[slug].description} ${f.products.length} modelos${f.min !== null ? `, a partir de ${formatPrice(f.min)} por peça no atacado` : ''}. Orçamento online para empresas.`,
     path: ROUTES.linha(slug),
   })
 }
@@ -37,7 +37,7 @@ export async function generateMetadata({ params }: PageProps<'/catalogo/linha/[l
  * preço de referência, tecidos, técnicas, para quem serve e FAQ, tudo
  * derivado dos dados do catálogo.
  */
-export default async function LinhaPage({ params }: PageProps<'/catalogo/linha/[linha]'>) {
+export default async function LinhaPage({ params }: { params: Promise<{ linha: string }> }) {
   const { linha } = await params
   const slug = categoryFromUrl(linha)
   if (!slug) notFound()
@@ -55,7 +55,7 @@ export default async function LinhaPage({ params }: PageProps<'/catalogo/linha/[
       ]}
       kicker={`Linha ${cat.name}`}
       title={seo.h1}
-      lead={`${cat.description} São ${f.products.length} ${f.products.length === 1 ? 'modelo' : 'modelos'} com preço de referência a partir de **${formatBRL(f.min)} por peça** no atacado (${ATACADO_MIN}+ peças do mesmo modelo), produzidos em Brasília com o logo da sua empresa.`}
+      lead={`${cat.description} São ${f.products.length} ${f.products.length === 1 ? 'modelo' : 'modelos'} produzidos em Brasília com o logo da sua empresa${f.min !== null ? `, com preço de referência a partir de **${formatPrice(f.min)} por peça** no atacado (${ATACADO_MIN}+ peças do mesmo modelo)` : ', com preço sob consulta'}.`}
       meta={
         <>
           <span>{f.products.length} modelos</span>
@@ -65,7 +65,7 @@ export default async function LinhaPage({ params }: PageProps<'/catalogo/linha/[
       }
       toc={[
         { id: 'modelos', title: 'Modelos' },
-        { id: 'precos', title: 'Preços de referência' },
+        ...(f.min !== null ? [{ id: 'precos', title: 'Preços de referência' }] : []),
         { id: 'personalizacao', title: 'Personalização' },
         { id: 'para-quem', title: 'Para quais empresas' },
         { id: 'perguntas', title: 'Perguntas frequentes' },
@@ -101,6 +101,7 @@ export default async function LinhaPage({ params }: PageProps<'/catalogo/linha/[
         </ul>
       </section>
 
+      {f.min !== null ? (
       <section id="precos" className={styles.section} aria-labelledby="precos-t">
         <h2 id="precos-t" className={styles.h2}>
           Preços de referência
@@ -112,6 +113,7 @@ export default async function LinhaPage({ params }: PageProps<'/catalogo/linha/[
         </p>
         <PriceTable category={slug} />
       </section>
+      ) : null}
 
       <section id="personalizacao" className={styles.section} aria-labelledby="personalizacao-t">
         <h2 id="personalizacao-t" className={styles.h2}>

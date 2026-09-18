@@ -1,5 +1,5 @@
 import { Cta } from '@/components/primitives/Cta'
-import { ATACADO_MIN, WHATSAPP, whatsappUrl } from '@/data/site'
+import { ATACADO_MIN, PEDIDO_MINIMO, WHATSAPP, whatsappUrl } from '@/data/site'
 import styles from './Content.module.css'
 
 /**
@@ -17,7 +17,10 @@ export function B2BCta({ context }: { context?: string }) {
       <p className={styles.ctaKicker}>Para empresas</p>
       <p className={styles.ctaTitle}>Uniformes para a sua equipe, em volume</p>
       <ul className={styles.ctaList}>
+        <li>Pedido mínimo de {PEDIDO_MINIMO.total} peças</li>
         <li>Atacado a partir de {ATACADO_MIN} peças do mesmo modelo</li>
+        <li>50% de entrada e o restante na entrega</li>
+        <li>Reunião presencial para ver as peças</li>
         <li>Mockup da arte para aprovar antes da produção</li>
         <li>Grade de tamanhos do PP ao G3</li>
       </ul>

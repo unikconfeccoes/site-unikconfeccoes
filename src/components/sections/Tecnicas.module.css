@@ -113,3 +113,12 @@
     will-change: auto;
   }
 }
+
+.more {
+  font-family: var(--font-mono);
+  font-size: var(--mono-xs);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  padding-block: 0.5rem;
+}

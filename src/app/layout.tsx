@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from 'next'
 import { fontVariables } from '@/lib/fonts'
-import { SITE, SOCIAL, WHATSAPP } from '@/data/site'
+import { SITE } from '@/data/site'
+import { JsonLd } from '@/components/seo/JsonLd'
+import { organizationJsonLd, websiteJsonLd } from '@/lib/seo'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { AtmosphereObserver } from '@/components/layout/AtmosphereObserver'
@@ -13,33 +15,57 @@ import '@/styles/globals.css'
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
-    default: `${SITE.name} — Uniformes premium em Brasília`,
-    template: `%s — ${SITE.shortName}`,
+    default: `Confecção de uniformes para empresas em Brasília | ${SITE.name}`,
+    template: `%s | ${SITE.name}`,
   },
   description: SITE.description,
   applicationName: SITE.name,
   keywords: [
+    'confecção de uniformes',
+    'uniformes para empresas',
+    'uniformes profissionais',
     'uniformes Brasília',
-    'uniformes personalizados',
+    'uniforme corporativo',
     'camisa polo personalizada',
     'dólmã personalizada',
-    'serigrafia Brasília',
+    'jaleco personalizado',
     'bordado em uniforme',
+    'serigrafia',
     'DTF',
     'sublimação',
     'private label',
   ],
+  authors: [{ name: SITE.name, url: SITE.url }],
+  creator: SITE.name,
+  publisher: SITE.name,
+  category: 'Confecção de uniformes',
   alternates: { canonical: '/' },
   openGraph: {
     type: 'website',
     locale: 'pt_BR',
     url: SITE.url,
     siteName: SITE.name,
-    title: `${SITE.name} — Uniformes premium em Brasília`,
+    title: `Confecção de uniformes para empresas em Brasília | ${SITE.name}`,
     description: SITE.description,
   },
-  robots: { index: true, follow: true },
+  twitter: { card: 'summary_large_image' },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1, 'max-video-preview': -1 },
+  },
   formatDetection: { telephone: false, address: false, email: false },
+  /*
+   * Verificação de propriedade. Preencha no painel da Vercel:
+   *   NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION  (Search Console, método "tag HTML")
+   *   NEXT_PUBLIC_BING_SITE_VERIFICATION    (Bing Webmaster Tools)
+   */
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || undefined,
+    other: process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION
+      ? { 'msvalidate.01': process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION }
+      : undefined,
+  },
 }
 
 export const viewport: Viewport = {
@@ -50,17 +76,6 @@ export const viewport: Viewport = {
   themeColor: '#0b0b0b',
 }
 
-const businessJsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'ClothingStore',
-  name: SITE.name,
-  description: SITE.description,
-  url: SITE.url,
-  foundingDate: String(SITE.founded),
-  telephone: WHATSAPP.display,
-  address: { '@type': 'PostalAddress', addressLocality: SITE.city, addressRegion: SITE.state, addressCountry: 'BR' },
-  sameAs: [SOCIAL.instagram.url, SOCIAL.instagramLab.url],
-}
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -69,7 +84,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* A classe `js` é o que faz o CSS confiar no GSAP para revelar
             conteúdo. Sem JS ela nunca é escrita e tudo fica visível. */}
         <script dangerouslySetInnerHTML={{ __html: `document.documentElement.classList.add('js')` }} />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(businessJsonLd) }} />
+        {/* A empresa e o site, em todas as páginas: as demais entidades apontam para estes @id. */}
+        <JsonLd data={[organizationJsonLd(), websiteJsonLd()]} />
+        <link rel="alternate" type="text/plain" href="/llms.txt" title="Resumo do site para assistentes de IA" />
       </head>
       <body data-atmosphere="noite">
         <a href="#conteudo" className="skip-link">

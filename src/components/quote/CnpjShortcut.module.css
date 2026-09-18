@@ -1,0 +1,151 @@
+.box {
+  display: grid;
+  gap: 0.5rem;
+  padding: var(--space-sm) var(--space-md);
+  border-inline-start: 5px solid var(--accent);
+  background-color: var(--surface-raised);
+  color: var(--ink);
+  font-size: var(--text-sm);
+}
+
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-sm);
+}
+
+.kicker {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--mono-sm);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.title {
+  display: grid;
+  gap: 0.2rem;
+  font-weight: 800;
+  font-stretch: 116%;
+  text-transform: uppercase;
+  font-size: var(--text-lg);
+  letter-spacing: -0.02em;
+}
+
+.name {
+  font-weight: 800;
+  font-stretch: 116%;
+  text-transform: uppercase;
+  font-size: var(--text-lg);
+  letter-spacing: -0.02em;
+  overflow-wrap: anywhere;
+}
+
+.meta {
+  color: var(--ink-muted);
+  overflow-wrap: anywhere;
+}
+
+.meta strong {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.cnae {
+  color: var(--ink-faint);
+}
+
+.warn {
+  color: #d08a5c;
+}
+
+.note,
+.status {
+  color: var(--ink-faint);
+}
+
+.status:empty {
+  display: none;
+}
+
+.error {
+  color: #e0806b;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.input {
+  flex: 1 1 14rem;
+  min-inline-size: 0;
+  min-block-size: 46px;
+  padding: 0.7rem 0.85rem;
+  background-color: var(--surface);
+  border: 1px solid var(--rule-strong);
+  border-radius: 0;
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: var(--text-md);
+  letter-spacing: 0.04em;
+}
+
+.input:focus-visible {
+  outline-offset: 0;
+  border-color: var(--accent);
+}
+
+.input[aria-invalid] {
+  border-color: #e0806b;
+}
+
+.input[aria-busy] {
+  border-color: var(--accent);
+}
+
+.link,
+.retry,
+.cta {
+  font-family: var(--font-mono);
+  font-size: var(--mono-sm);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.link,
+.retry {
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+.retry {
+  padding-inline: 0.5rem;
+}
+
+.suggest {
+  display: grid;
+  gap: 0.35rem;
+  padding-block-start: 0.5rem;
+  border-block-start: 1px solid var(--rule);
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1rem;
+}
+
+.list a,
+.note a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  text-decoration-color: var(--accent);
+}

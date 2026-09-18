@@ -5,7 +5,7 @@ import { CATEGORIES, PRODUCTS } from '@/data/catalog'
 import { ATACADO_MIN } from '@/data/site'
 import { ROUTES } from '@/data/seo/routes'
 import { CATEGORY_SEO, categoryFacts } from '@/lib/catalog-seo'
-import { formatBRL } from '@/lib/format'
+import { formatPrice } from '@/lib/format'
 import { itemListJsonLd, pageMeta } from '@/lib/seo'
 
 export const metadata = pageMeta({
@@ -36,7 +36,7 @@ export default function LinhasPage() {
                 <span className={styles.cardTitle}>{CATEGORY_SEO[c.slug].h1}</span>
                 <span className={styles.cardText}>{c.description}</span>
                 <span className={styles.cardText}>
-                  {f.products.length} modelos · a partir de <strong>{formatBRL(f.min)}</strong>
+                  {f.products.length} modelos · {f.min !== null ? 'a partir de ' : ''}<strong>{formatPrice(f.min)}</strong>
                 </span>
               </a>
             )

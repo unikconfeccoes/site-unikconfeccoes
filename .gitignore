@@ -15,3 +15,4 @@ supabase/.branches
 
 # fontes internas (planilhas de custo, arquivos originais) — não publicar
 _fontes/
+.env*

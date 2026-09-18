@@ -13,8 +13,9 @@ export const CATEGORY_URL: Record<CategorySlug, string> = {
   camisetas: 'camisetas-personalizadas',
   esportivo: 'camisetas-dry-fit',
   sociais: 'camisas-sociais',
-  moletons: 'moletons-personalizados',
+  moletons: 'casacos-e-moletons',
   calcas: 'calcas-profissionais',
+  shorts: 'shorts',
   gastronomia: 'dolmas-e-aventais',
   jalecos: 'jalecos-personalizados',
 }
@@ -104,6 +105,21 @@ export const FABRIC_ID_TO_GUIDE: Record<string, FabricSlug> = {
   gabardine: 'gabardine',
   jeans: 'jeans',
   'brim-leve': 'brim',
+  egipcio: 'algodao-pima',
+  peruano: 'algodao-pima',
+  'algodao-premium': 'algodao',
+  'dry-respiravel': 'dry-fit',
+  'dry-poliamida-elastano': 'dry-fit',
+  'tricoline-pura': 'tricoline',
+  'algodao-social': 'algodao',
+  'gabardine-jaleco': 'gabardine',
+  'moletom-calca': 'moletom',
+  'moletom-short': 'moletom',
+  'brim-calca': 'brim',
+  'jeans-calca': 'jeans',
+  'dry-short': 'dry-fit',
+  'linho-short': 'linho',
+  'tactel-jaqueta': 'tactel',
 }
 
 export const ROUTES = {

@@ -1,9 +1,12 @@
+import type { Company } from '@/lib/cnpj'
 import type { QuoteItem } from '@/lib/quote-store'
 import { itemTotal, quoteTotal } from '@/lib/quote-store'
 
 export type QuoteContact = {
   nome: string
   empresa: string
+  cnpj: string
+  equipe: string
   whatsapp: string
   email: string
   cidade: string
@@ -32,7 +35,7 @@ function sizesLine(sizes: Record<string, number>): string {
  * celular por quem vai orçar: cabeçalho, uma seção por item, contato no fim.
  * O WhatsApp interpreta *negrito*.
  */
-export function quoteMessage(code: string, items: readonly QuoteItem[], contact: QuoteContact): string {
+export function quoteMessage(code: string, items: readonly QuoteItem[], contact: QuoteContact, company?: Company | null): string {
   const lines: string[] = [
     `*Pedido de orçamento ${code}*`,
     `${items.length} ${items.length === 1 ? 'item' : 'itens'} · ${quoteTotal(items)} peças`,
@@ -52,6 +55,10 @@ export function quoteMessage(code: string, items: readonly QuoteItem[], contact:
   lines.push('*Contato*')
   lines.push(`Nome: ${contact.nome}`)
   if (contact.empresa) lines.push(`Empresa: ${contact.empresa}`)
+  if (contact.cnpj) lines.push(`CNPJ: ${contact.cnpj}`)
+  if (company?.razaoSocial && company.razaoSocial !== contact.empresa) lines.push(`Razão social: ${company.razaoSocial}`)
+  if (company?.cnaeDescricao) lines.push(`Ramo: ${company.cnaeDescricao}`)
+  if (contact.equipe) lines.push(`Tamanho da equipe: ${contact.equipe}`)
   lines.push(`WhatsApp: ${contact.whatsapp}`)
   if (contact.email) lines.push(`E-mail: ${contact.email}`)
   if (contact.cidade) lines.push(`Cidade: ${contact.cidade}`)

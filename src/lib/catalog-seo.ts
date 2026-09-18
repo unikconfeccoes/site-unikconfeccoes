@@ -30,8 +30,9 @@ export const CATEGORY_SEO: Record<CategorySlug, { h1: string; seoTitle: string; 
   camisetas: { h1: 'Camisetas personalizadas para empresas e eventos', seoTitle: 'Camisetas personalizadas para empresas', searchName: 'camiseta personalizada' },
   esportivo: { h1: 'Camisetas dry fit e uniformes esportivos', seoTitle: 'Camiseta dry fit personalizada e uniforme esportivo', searchName: 'camiseta dry fit personalizada' },
   sociais: { h1: 'Camisas sociais para uniforme corporativo', seoTitle: 'Camisa social para uniforme corporativo', searchName: 'camisa social para uniforme' },
-  moletons: { h1: 'Moletons personalizados para empresas e formaturas', seoTitle: 'Moletom personalizado com capuz', searchName: 'moletom personalizado' },
-  calcas: { h1: 'Calças profissionais para uniforme', seoTitle: 'Calça pied de poule e calça de tactel para uniforme', searchName: 'calça para uniforme' },
+  moletons: { h1: 'Casacos, jaquetas e moletons personalizados', seoTitle: 'Moletom, corta-vento e jaqueta personalizada', searchName: 'moletom e jaqueta personalizada' },
+  calcas: { h1: 'Calças profissionais para uniforme', seoTitle: 'Calça para uniforme: brim, jeans, tactel e cozinha', searchName: 'calça para uniforme' },
+  shorts: { h1: 'Shorts personalizados para esporte e hotelaria', seoTitle: 'Short de futebol, futevôlei, moletom e linho', searchName: 'short personalizado' },
   gastronomia: { h1: 'Dólmãs e aventais personalizados para restaurantes', seoTitle: 'Dólmã e avental personalizado para restaurante', searchName: 'dólmã e avental personalizado' },
   jalecos: { h1: 'Jalecos personalizados com nome bordado', seoTitle: 'Jaleco personalizado com nome bordado', searchName: 'jaleco personalizado' },
 }
@@ -51,15 +52,15 @@ function unique<T>(list: readonly T[]): T[] {
 
 export function categoryFacts(category: CategorySlug) {
   const products = productsOf(category)
-  const prices = products.flatMap((p) => p.fabrics.map((f) => fabricPrice(f)))
+  const prices = products.flatMap((p) => p.fabrics.map((f) => fabricPrice(f))).filter((p) => p !== null)
   const techniques = unique(products.flatMap((p) => p.techniques)) as TechniqueSlug[]
   const segments = unique(products.flatMap((p) => p.segments)) as SegmentSlug[]
   const fabrics = unique(products.flatMap((p) => p.fabrics.map((f) => f.label)))
   const guides = unique(products.flatMap((p) => p.fabrics.map((f) => FABRIC_ID_TO_GUIDE[f.id]).filter((g) => g !== undefined)))
   return {
     products,
-    min: Math.min(...prices.map((p) => p.atacado)),
-    max: Math.max(...prices.map((p) => p.varejo)),
+    /** null quando nenhum modelo da linha tem preço na planilha. */
+    min: prices.length ? Math.min(...prices.map((p) => p.atacado)) : null,
     techniques,
     segments,
     fabrics,
@@ -80,7 +81,10 @@ export function categoryFaq(category: CategorySlug): Faq[] {
   return [
     {
       q: `Quanto custa ${seo.searchName} na UNIK?`,
-      a: `Na linha ${cat.name}, os preços de referência começam em ${formatBRL(f.min)} por peça no atacado (a partir de ${ATACADO_MIN} peças do mesmo modelo), já com personalização simples. O valor final depende do tecido, da técnica, do número de cores e posições da arte e da quantidade. Veja a tabela completa em [quanto custa uniforme personalizado](${ROUTES.guia('quanto-custa-uniforme-personalizado')}).`,
+      a:
+        f.min !== null
+          ? `Na linha ${cat.name}, os preços de referência começam em ${formatBRL(f.min)} por peça no atacado (a partir de ${ATACADO_MIN} peças do mesmo modelo), já com personalização simples. O valor final depende do tecido, da técnica, do número de cores e posições da arte e da quantidade. Veja a tabela completa em [quanto custa uniforme personalizado](${ROUTES.guia('quanto-custa-uniforme-personalizado')}).`
+          : `Os modelos da linha ${cat.name} são orçados sob consulta: o valor depende do tecido, da técnica, do número de cores e posições da arte e da quantidade. Monte a lista no [orçamento](${ROUTES.orcamento}) e a resposta vem com valores e prazo.`,
     },
     {
       q: `Quais tecidos estão disponíveis na linha ${cat.name}?`,
@@ -107,7 +111,10 @@ export function productFaq(product: Product): Faq[] {
   return [
     {
       q: `Qual é o preço da ${product.name} personalizada?`,
-      a: `A ${product.name} custa a partir de ${formatBRL(min)} por peça no atacado (${ATACADO_MIN}+ peças do mesmo modelo), já com personalização simples. Abaixo de ${ATACADO_MIN} peças vale o preço unitário de cada tecido, mostrado no configurador acima.`,
+      a:
+        min !== null
+          ? `A ${product.name} custa a partir de ${formatBRL(min)} por peça no atacado (${ATACADO_MIN}+ peças do mesmo modelo), já com personalização simples. Abaixo de ${ATACADO_MIN} peças vale o preço unitário de cada tecido, mostrado no configurador acima.`
+          : `O preço da ${product.name} é sob consulta, porque depende do tecido, da técnica e da quantidade. Monte o pedido no configurador acima e a resposta vem com valores e prazo.`,
     },
     {
       q: `Quais tecidos a ${product.name} tem?`,

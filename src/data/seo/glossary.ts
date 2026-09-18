@@ -6,6 +6,13 @@ import type { GlossaryTerm } from '@/data/seo/types'
  */
 export const GLOSSARY: readonly GlossaryTerm[] = [
   {
+    slug: 'algodao-egipcio',
+    term: 'Algodão egípcio',
+    definition:
+      'Algodão egípcio é o algodão cultivado no Egito, conhecido pelas fibras longas que formam um fio liso e resistente. A malha fica macia, com toque nobre, e é usada em camisetas de linha premium.',
+    href: '/tecidos/algodao-pima',
+  },
+  {
     slug: 'alto-relevo',
     term: 'Alto relevo',
     definition:
@@ -16,7 +23,7 @@ export const GLOSSARY: readonly GlossaryTerm[] = [
     slug: 'atacado',
     term: 'Atacado',
     definition:
-      'Atacado é a compra em volume, com preço por peça menor do que no varejo. Na UNIK, o atacado vale a partir de 60 peças do mesmo modelo.',
+      'Atacado é a compra em volume, com preço por peça menor do que no varejo. Na UNIK, o preço de atacado vale a partir de 60 peças do mesmo modelo; o pedido mínimo é de 20 unidades.',
     href: '/guias/uniformes-no-atacado',
   },
   {
@@ -32,6 +39,13 @@ export const GLOSSARY: readonly GlossaryTerm[] = [
     definition:
       'Brim é um tecido plano resistente, de trama em diagonal (sarja), feito de algodão ou de algodão com poliéster. É usado em jalecos, calças e uniformes de serviço que precisam durar.',
     href: '/tecidos/brim',
+  },
+  {
+    slug: 'corta-vento',
+    term: 'Corta-vento',
+    definition:
+      'Corta-vento é uma jaqueta leve, de tecido sintético com trama bem fechada, que bloqueia a passagem do vento. É prática para equipes externas e esportivas porque protege sem esquentar demais e ocupa pouco espaço.',
+    href: '/catalogo/jaqueta-corta-vento',
   },
   {
     slug: 'dolma',
@@ -60,6 +74,13 @@ export const GLOSSARY: readonly GlossaryTerm[] = [
     definition:
       'Etiqueta é a identificação costurada ou estampada na peça, com marca, tamanho, composição e instruções de lavagem. Em marcas próprias, a etiqueta personalizada faz a peça sair pronta para vender.',
     href: '/lab',
+  },
+  {
+    slug: 'fio-30-1',
+    term: 'Fio 30.1',
+    definition:
+      'Fio 30.1 é a numeração de um fio de algodão de título 30, com um cabo só. Quanto maior o número, mais fino o fio: o 30.1 forma uma malha leve e de toque liso, muito usada em camisetas de qualidade.',
+    href: '/tecidos/algodao',
   },
   {
     slug: 'gola-polo',
@@ -111,6 +132,13 @@ export const GLOSSARY: readonly GlossaryTerm[] = [
     href: '/catalogo/camiseta-oversized',
   },
   {
+    slug: 'oxford',
+    term: 'Oxford',
+    definition:
+      'Oxford é um tecido plano leve e resistente, geralmente de poliéster ou mistura com algodão, com trama que forma um leve quadriculado. É fácil de lavar, amassa pouco e é usado em jalecos e peças de uniforme de serviço.',
+    href: '/catalogo/jaleco-brim',
+  },
+  {
     slug: 'pantone',
     term: 'Pantone',
     definition:
@@ -125,11 +153,25 @@ export const GLOSSARY: readonly GlossaryTerm[] = [
     href: '/lab',
   },
   {
+    slug: 'pedido-minimo',
+    term: 'Pedido mínimo',
+    definition:
+      'Pedido mínimo é a menor quantidade de peças que a confecção produz em um pedido. Na UNIK, o mínimo é de 20 unidades, podendo mesclar dois tipos de produto, com pelo menos 10 unidades iguais de cada um.',
+    href: '/orcamento',
+  },
+  {
     slug: 'piquet',
     term: 'Piquet',
     definition:
       'Piquet é uma malha com trama em colmeia, que forma pequenos relevos na superfície. É o tecido clássico da camisa polo, porque dá estrutura à gola e aceita muito bem o bordado.',
     href: '/tecidos/piquet',
+  },
+  {
+    slug: 'poliamida',
+    term: 'Poliamida',
+    definition:
+      'Poliamida é uma fibra sintética (da família do náilon) macia, resistente e de toque gelado. Seca rápido e é usada em malhas dry, peças UV e jaquetas, mas não aceita estampa por sublimação.',
+    href: '/tecidos/dry-fit',
   },
   {
     slug: 'private-label',
