@@ -1,0 +1,93 @@
+.screen {
+  position: fixed;
+  inset: 0;
+  z-index: calc(var(--z-preloader) + 1);
+  display: grid;
+  place-items: center;
+  padding: max(var(--space-lg), var(--safe-top)) var(--gutter) max(var(--space-lg), var(--safe-bottom));
+  background-color: var(--preto);
+  color: var(--osso);
+  overflow-y: auto;
+  --logo-letters: var(--ouro);
+  --logo-bar: var(--osso);
+  --logo-tag: color-mix(in oklab, var(--osso) 60%, var(--preto));
+}
+
+.card {
+  display: grid;
+  gap: var(--space-sm);
+  inline-size: min(100%, 24rem);
+}
+
+.logo {
+  margin-block-end: var(--space-lg);
+  justify-self: start;
+}
+
+.title {
+  font-weight: 800;
+  font-stretch: 118%;
+  text-transform: uppercase;
+  font-size: clamp(1.8rem, 7vw, 2.4rem);
+  line-height: 0.95;
+  letter-spacing: -0.045em;
+}
+
+.text {
+  font-size: var(--text-md);
+  color: color-mix(in oklab, var(--osso) 76%, var(--preto));
+  margin-block-end: var(--space-sm);
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: var(--mono-xs);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ouro);
+}
+
+.input {
+  inline-size: 100%;
+  min-block-size: 52px;
+  padding: 0 1rem;
+  background-color: var(--grafite);
+  border: 1px solid color-mix(in oklab, var(--osso) 30%, transparent);
+  border-radius: 0;
+  color: var(--osso);
+  font-family: var(--font-mono);
+  font-size: 1.25rem;
+  letter-spacing: 0.3em;
+}
+
+.input:focus-visible {
+  outline: 2px solid var(--ouro);
+  outline-offset: 0;
+}
+
+.input[aria-invalid] {
+  border-color: #e0806b;
+}
+
+.error {
+  font-size: var(--text-sm);
+  color: #f0a08e;
+}
+
+.button {
+  min-block-size: 52px;
+  margin-block-start: var(--space-xs);
+  background-color: var(--ouro);
+  color: var(--preto);
+  font-family: var(--font-mono);
+  font-size: var(--mono-sm);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .button:hover {
+    background-color: var(--osso);
+  }
+}
