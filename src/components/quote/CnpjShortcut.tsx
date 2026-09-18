@@ -146,15 +146,20 @@ export function CnpjShortcut({
 
   return (
     <section className={styles.box} aria-labelledby={`${uid}-titulo`}>
-      <label htmlFor={`${uid}-cnpj`} className={styles.title} id={`${uid}-titulo`}>
-        <span className={styles.kicker}>Atalho</span>
-        Digite seu CNPJ
-      </label>
-      <p className={styles.note}>
-        {variant === 'quote'
-          ? 'Buscamos a empresa na Receita e preenchemos os dados da proposta.'
-          : 'Buscamos a empresa na Receita, indicamos os modelos do seu ramo e deixamos o orçamento preenchido.'}
-      </p>
+      {variant === 'quote' ? (
+        <>
+          <label htmlFor={`${uid}-cnpj`} className={styles.title} id={`${uid}-titulo`}>
+            <span className={styles.kicker}>Atalho</span>
+            Digite seu CNPJ
+          </label>
+          <p className={styles.note}>Buscamos a empresa na Receita e preenchemos os dados da proposta.</p>
+        </>
+      ) : (
+        <label htmlFor={`${uid}-cnpj`} className={styles.title} id={`${uid}-titulo`}>
+          Inicie agora sua cotação
+          <span className="u-visually-hidden">: digite o CNPJ da empresa</span>
+        </label>
+      )}
       <div className={styles.row}>
         <input
           id={`${uid}-cnpj`}

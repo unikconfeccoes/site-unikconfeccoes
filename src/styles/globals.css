@@ -17,6 +17,9 @@
 html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
+  /* Sem zoom por duplo toque e sem o atraso de 300 ms: toque de app. */
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
   /* Scroll nativo: nenhuma lib sequestra a rolagem. */
   scroll-behavior: smooth;
   scroll-padding-top: calc(var(--header-h) + var(--space-md));
@@ -31,6 +34,8 @@ html {
 
 body {
   min-height: 100dvh;
+  /* O "puxão" lateral do Safari não arrasta a página: sensação de app. */
+  overscroll-behavior-x: none;
   background-color: var(--surface);
   color: var(--ink);
   font-family: var(--font-sans);
@@ -217,4 +222,30 @@ body::before {
   opacity: 0.035;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
   mix-blend-mode: overlay;
+}
+
+/* =========================================================================
+   MOBILE COMO APP
+   ========================================================================= */
+
+/* O iOS dá zoom automático em qualquer campo com fonte menor que 16 px.
+   Campos com 16 px no celular = foco sem zoom, teclado sem pulo de tela. */
+@media (max-width: 1023px) {
+  input,
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+}
+
+/* Toque longo em botões e links de navegação não abre o menu de "copiar"
+   nem seleciona texto: comportamento de botão de app. */
+@media (hover: none) and (pointer: coarse) {
+  button,
+  [role='button'],
+  nav a {
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+  }
 }

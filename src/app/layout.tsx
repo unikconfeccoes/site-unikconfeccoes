@@ -55,6 +55,8 @@ export const metadata: Metadata = {
     googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1, 'max-video-preview': -1 },
   },
   formatDetection: { telephone: false, address: false, email: false },
+  // "Adicionar à Tela de Início" no iPhone abre em tela cheia, como app.
+  appleWebApp: { capable: true, title: 'UNIK', statusBarStyle: 'black-translucent' },
   /*
    * Verificação de propriedade. Preencha no painel da Vercel:
    *   NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION  (Search Console, método "tag HTML")
@@ -68,10 +70,19 @@ export const metadata: Metadata = {
   },
 }
 
+/*
+ * Experiência de app no celular, a pedido do cliente: sem zoom.
+ * maximumScale 1 + userScalable false travam a pinça no Android; no iOS o
+ * Safari ignora essas flags, então o bloqueio de gesto fica no script abaixo
+ * e o duplo toque é desligado por `touch-action: manipulation` (globals.css).
+ * Contrapartida conhecida: WCAG 1.4.4 recomenda permitir zoom. Por isso os
+ * textos têm corpo mínimo de 16px nos campos e escala fluida no resto.
+ */
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  maximumScale: 5,
+  maximumScale: 1,
+  userScalable: false,
   viewportFit: 'cover',
   themeColor: '#0b0b0b',
 }
@@ -83,7 +94,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         {/* A classe `js` é o que faz o CSS confiar no GSAP para revelar
             conteúdo. Sem JS ela nunca é escrita e tudo fica visível. */}
-        <script dangerouslySetInnerHTML={{ __html: `document.documentElement.classList.add('js')` }} />
+        <script
+          dangerouslySetInnerHTML={{
+            // `js` libera as animações; os listeners de gesture bloqueiam a
+            // pinça no Safari do iPhone, que ignora user-scalable=no.
+            __html: `document.documentElement.classList.add('js');['gesturestart','gesturechange','gestureend'].forEach(function(e){document.addEventListener(e,function(ev){ev.preventDefault()},{passive:false})});`,
+          }}
+        />
         {/* A empresa e o site, em todas as páginas: as demais entidades apontam para estes @id. */}
         <JsonLd data={[organizationJsonLd(), websiteJsonLd()]} />
         <link rel="alternate" type="text/plain" href="/llms.txt" title="Resumo do site para assistentes de IA" />
